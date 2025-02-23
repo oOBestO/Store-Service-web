@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { GuestService } from './Service/service';  // นำเข้า Service
 import { Guest } from './interface/guest.model';  // นำเข้า Model
+import { PrimeNgModule } from '../app.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
+  imports: [
+    CommonModule,
+    PrimeNgModule  // นำเข้าโมดูลที่รวม PrimeNG
+  ],
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
-[x: string]: any;
-  guests: Guest[] = []; // เก็บข้อมูล Guest ที่ได้จาก API
+  [x: string]: any;
+  guests: Guest[] = [];
+  date: Date = new Date();
+  currentStep: number = 1;
 
   constructor(private guestService: GuestService) {
   } // Inject Service
