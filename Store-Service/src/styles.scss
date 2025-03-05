@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: normal;
+  background: rgb(228, 123, 53);
+  color: var(--text-color);
+  padding: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+/* เปลี่ยนสีพื้นหลังของแต่ละ Step */
+.p-steps .p-steps-item .p-menuitem-link {
+  background: rgba(228, 123, 53); /* เปลี่ยนจากสีขาวเป็นสีแดง */
+  border-radius: 8px; /* ทำให้มีขอบโค้ง */
+  color: rgb(255, 255, 255) !important; /* เปลี่ยนสีตัวหนังสือเป็นขาว */
+}
+
+// /* เปลี่ยนสีของ Step ที่ถูกเลือก */
+// .p-steps .p-steps-item.p-highlight .p-menuitem-link {
+//   background-color: darkred !important; /* สีแดงเข้มสำหรับ Step ที่ Active */
+//   color: white !important; /* เปลี่ยนสีตัวหนังสือ */
+// }
+/* เปลี่ยนสีของเส้นเชื่อมระหว่าง Step */
+
+.p-steps .p-steps-item::after {
+  background-color: black ;
+  height: 4px !important;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* เพิ่มเงาให้เส้น */
+}
+
+/* เปลี่ยนสีตัวหนังสือของ Step */
+.p-steps-item .p-steps-title {
+  color: rgb(255, 255, 255) !important;
+}
+// /* เปลี่ยนสีตัวหนังสือของ Step ที่กำลัง Active */
+// .p-steps .p-steps-item.p-highlight .p-menuitem-link .p-steps-title {
+//   color: rgb(255, 255, 255) !important; /* เปลี่ยนสีเป็นสีแดง */
+// }
