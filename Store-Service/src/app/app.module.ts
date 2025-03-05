@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 
 // Import PrimeNG modules
 import { ButtonModule } from 'primeng/button';
+import { StepsModule } from 'primeng/steps';
 import { CalendarModule } from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
-import { NgxQRCodeModule  } from '@techiediaries/ngx-qrcode';
-
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [],
   imports: [
@@ -15,16 +14,15 @@ import { NgxQRCodeModule  } from '@techiediaries/ngx-qrcode';
     ButtonModule,
     CalendarModule,
     StepperModule,
-    FormsModule,
-    NgxQRCodeModule  // <-- คุณนำเข้า FormsModule ที่นี่ // <-- เพิ่ม QRCodeModule ที่นี่
+    StepsModule,
+    ToastModule,
   ],
   exports: [
     ButtonModule,
     CalendarModule,
     StepperModule,
-    FormsModule,
-    NgxQRCodeModule
-      // <-- นำออกมาให้ใช้งานในโมดูลอื่น // <-- เพิ่ม QRCodeModule ใน exports ด้วย
+    StepsModule,
+    ToastModule,
   ]
 })
 export class PrimeNgModule {}
