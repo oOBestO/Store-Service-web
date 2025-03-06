@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { PrimeNgModule } from '../../../../app.module';
+import { PrimeNgModule } from '../app.module';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 
