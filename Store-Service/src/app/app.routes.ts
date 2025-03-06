@@ -3,8 +3,9 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { BillComponent } from './bill/bill.component';
 import { PaymentComponent } from './payment/payment.component';
-import { OrderComponent } from './Order-food/src/app/home/Order-food.component';
+import { OrderComponent } from './Order-food/Order-food.component';
 import { SuccessComponent } from './success/success.component';
+import { AddmenuComponent } from './addmenu/addmenu.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'payment', component: PaymentComponent },
   { path: 'order', component: OrderComponent },
   { path: 'success', component: SuccessComponent }, // ✅ ตรวจสอบว่า path: 'success' อยู่จริง
+  { path: 'addmenu', component: AddmenuComponent}
 ];
 
 @NgModule({

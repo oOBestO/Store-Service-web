@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
   }
 
   linkpage(){
-    this.router.navigate(['/order']);
+    this.router.navigate(['/addmenu']);
   }
 
   // ดึงข้อมูล Guest ทั้งหมดจาก API

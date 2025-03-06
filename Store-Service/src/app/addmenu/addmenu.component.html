@@ -1,0 +1,32 @@
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <button class="back-btn">⬅️</button>
+    <span class="title">เพิ่มเมนู และ เปลี่ยนแปลงเมนู</span>
+    <img src="assets/logo.png" alt="Logo" class="logo">
+  </div>
+
+  <!-- Title -->
+  <h1 class="main-title">Restaurant Custom</h1>
+  <h2 class="subtitle">ข้าวสวย</h2>
+
+  <!-- Form -->
+  <div class="form-container">
+    <label for="menu-name">ชื่อรายการ</label>
+    <input type="text" id="menu-name" [(ngModel)]="newItem" class="input-box" placeholder="เพิ่มชื่อเมนู">
+
+    <!-- ปุ่มเพิ่มรายการ & ลบหมวดหมู่ -->
+    <div class="button-group">
+      <button (click)="addItem()" class="btn add-btn">เพิ่มรายการ</button>
+      <button (click)="removeCategory()" class="btn delete-btn">ลบหมวดหมู่</button>
+    </div>
+
+    <!-- รายการเมนู -->
+    <ul class="menu-list">
+      <li *ngFor="let item of menuItems" class="menu-item">{{ item }}</li>
+    </ul>
+  </div>
+
+  <!-- ปุ่มยืนยัน -->
+  <button (click)="confirm()" class="btn confirm-btn">ยืนยัน</button>
+</div>
