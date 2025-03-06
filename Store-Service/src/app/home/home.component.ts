@@ -1,11 +1,10 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { GuestService } from './Service/service';  // นำเข้า Service
-import { Guest } from './interface/guest.model';  // นำเข้า Model
+import { Guest ,MenuItems } from './interface/guest.model';  // นำเข้า Model
 import { PrimeNgModule } from '../app.module';
 import { CommonModule } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-home',
@@ -21,6 +20,8 @@ import { Router } from '@angular/router';
 })
 
 export class HomeComponent implements OnInit {
+  qrData: string = "https://mywebsite.com";
+  qrSize: number = 250;
   [x: string]: any;
   guests: Guest[] = [];
   date: Date = new Date();
@@ -28,6 +29,8 @@ export class HomeComponent implements OnInit {
   items: MenuItem[] | undefined;
   activeIndex: number = 0;
   customClass = 'text-yellow';
+  menuItems: MenuItems[] = [];
+  categories: string[] = ['กะเพรา', 'ข้าวผัด', 'เครื่องดื่ม'];
 
   onActiveIndexChange(event: number) {
     this.activeIndex = event;
@@ -38,38 +41,48 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.addNewGuest(); // โหลดข้อมูลเมื่อ Component ทำงาน
+    this.guestService.getMenu().subscribe(data => {
+      this.menuItems = data;
+    });
     this.items = [
       {
         label: 'รายการอาหาร',
         command: (event: any) => {
-          this.messageService.add({ severity: 'info', summary: 'First Step', detail: event.item.label });
           this.router.navigate(['/order']); // ✅ ใช้ this.router อย่างถูกต้อง
         }
       },
       {
         label: 'บิลค่าอาหาร',
         command: (event: any) => {
-          this.messageService.add({ severity: 'info', summary: 'Second Step', detail: event.item.label });
           this.router.navigate(['/bill']);
         }
       },
       {
         label: 'ชำระเงิน',
         command: (event: any) => {
-          this.messageService.add({ severity: 'info', summary: 'Third Step', detail: event.item.label });
           this.router.navigate(['/payment']);
         }
       },
       {
         label: 'ชำระเงินเสร็จสิ้น',
         command: (event: any) => {
-          console.log("Navigating to /success");
           this.router.navigate(['/success']);
         }
       }
     ];
   }
 
+  getItemsByCategory(category: string): MenuItems[] {
+    return this.menuItems.filter(item => item.category === category);
+  }
+
+  getRecommendedItems(): MenuItems[] {
+     return this.menuItems.filter(i => i.recommended);
+  }
+
+  linkpage(){
+    this.router.navigate(['/order']);
+  }
 
   // ดึงข้อมูล Guest ทั้งหมดจาก API
   getAllGuests() {
@@ -85,7 +98,6 @@ export class HomeComponent implements OnInit {
       name: 'Michael',
       email: 'michael@email.com'
     };
-
     this.guestService.addGuest(newGuest).subscribe((response) => {
       console.log('เพิ่ม Guest สำเร็จ:', response);
       this.getAllGuests(); // โหลดข้อมูลใหม่

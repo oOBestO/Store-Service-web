@@ -1,7 +1,8 @@
+
 <div class="background">
   <div class="card">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <p-toast />
+    <!-- <p-toast />
     <p-steps
     [model]="items"
     [readonly]="false"
@@ -9,7 +10,32 @@
     (activeIndexChange)="onActiveIndexChange($event)"
     content=""
     [ngClass]="customClass"
-    />
+    /> -->
+    <p-card header="Restaurant ข้าวสวย">
+    <div class="restaurant-container">
+      <div class="menu-section">
+        <h2>เมนูแนะนำ</h2>
+        <div class="menu-grid">
+          <p-card *ngFor="let item of getRecommendedItems()" [header]="item.name">
+            <img [src]="item.imageUrl" alt="{{ item.name }}" class="menu-image"/>
+            <p>{{ item.price }} ฿</p>
+            <p-checkbox></p-checkbox>
+          </p-card>
+        </div>
+      </div>
+      <div class="menu-section" *ngFor="let category of categories">
+        <h2>{{ category }}</h2>
+        <div class="menu-grid">
+          <p-card *ngFor="let item of getItemsByCategory(category)" [header]="item.name">
+            <img [src]="item.imageUrl" alt="{{ item.name }}" class="menu-image"/>
+            <p>{{ item.price }} ฿</p>
+            <p-checkbox></p-checkbox>
+          </p-card>
+        </div>
+      </div>
+      <p-button label="Search" icon="pi pi-check" (onClick)="linkpage()" />
+    </div>
+  </p-card>
   </div>
 </div>
-<p-button label="Search" icon="pi pi-check" (onClick)="buttons()" />
+<qrcode [qrdata]="qrData" [errorCorrectionLevel]="'M'"></qrcode>

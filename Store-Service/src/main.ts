@@ -5,12 +5,15 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { HomeComponent } from './app/home/home.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BillComponent } from './app/bill/bill.component';
+import { PaymentComponent } from './app/payment/payment.component';
+import { OrderComponent } from './app/Order-food/src/app/home/Order-food.component';
+import { SuccessComponent } from './app/success/success.component';
+import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [provideAnimationsAsync(),
-    provideRouter([
-      { path: '', component: HomeComponent } // ตั้งค่า Home เป็นหน้าแรก
-    ]),
+    provideRouter(routes),
     provideHttpClient()
   ]
 });

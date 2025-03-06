@@ -1,1 +1,17 @@
+<div class="background">
+  <div class="card">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <p-toast />
+    <p-steps
+    [model]="items"
+    [readonly]="true"
+    [activeIndex]="activeIndex"
+    (activeIndexChange)="onActiveIndexChange($event)"
+    content=""
+    [ngClass]="customClass"
+    />
+  </div>
+</div>
 <p>payment works!</p>
+<p-button label="Search" icon="pi-chevron-right" (onClick)="butTonnext()" />
+<p-button label="Search" icon="pi-chevron-left" (onClick)="butTonleft()" />
