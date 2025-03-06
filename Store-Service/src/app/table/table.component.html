@@ -1,0 +1,40 @@
+<header class="header bg-black p-4 w-full fixed top-0 left-0 z-10 flex items-center justify-start">
+    <i class="pi pi-angle-double-left icon-left"></i>
+</header>
+
+<body>
+    <section class="column">
+        <section class="heading">
+            <div class="title">
+                กำหนดโต๊ะ
+            </div>
+        </section>
+
+        <p-card class="Card">
+            <div *ngFor="let table of tables; let i = index" class="table-row">
+                <label class="C1">จำนวนที่นั่งในแต่ละโต๊ะ</label>
+                
+                <!-- ✅ Checkbox เลือกหลายตัวได้ -->
+                <p-checkbox class="Box" [(ngModel)]="table.checked" binary="true"></p-checkbox>
+                
+                <!-- ✅ ปรับ input ให้ชิดซ้าย -->
+                <input type="number" min="0" [(ngModel)]="table.seats" class="input-box" />
+
+                <div class="C1">จำนวนโต๊ะ</div>
+                <input type="number" min="0" [(ngModel)]="table.count" class="input-box" />
+                <hr>
+            </div>
+
+            <!-- ปุ่มเพิ่มโต๊ะ -->
+            <label class="Add">เพิ่มโต๊ะ</label>
+            <i class="pi pi-plus" style="font-size: 1.5rem; cursor: pointer;" (click)="addTable()"></i>
+
+            <!-- ปุ่มบันทึก -->
+            <div class="button-container" style="text-align: center;">
+                <p-button label="บันทึก"
+                    [style]="{'width': '300px', 'background-color': 'black', 'border-color': 'white', 'color': 'white'}">
+                </p-button>
+            </div>
+        </p-card>
+    </section>
+</body>

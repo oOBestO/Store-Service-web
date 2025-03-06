@@ -1,0 +1,62 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: black;
+    height: 50px;
+    display: flex;
+    align-items: center;  /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    justify-content: flex-start; 
+}
+
+.icon-left {
+    color: white; /* เปลี่ยนไอคอนเป็นสีขาว */
+    font-size: 24px; /* ปรับขนาดไอคอน */
+    margin-left: 15px; /* เว้นระยะห่างจากขอบซ้าย */
+    cursor: pointer; /* ทำให้กดได้ */
+}
+
+.column {
+    position: relative;
+    top: 30px;
+}
+
+.button-container , .con {
+    position: relative;
+    top: 20px;
+}
+
+.Card {
+    position: relative;
+    top: 50px;
+}
+
+.pi {
+    float: right;
+}
+
+.Add {
+    font-size: 20px;
+    color: black;
+}
+
+.Box {
+    float: right;
+}
+
+.C1 {
+    color: black;
+}
+
+.Card input {
+    padding: 0.3rem 1rem;  /* ✅ ลด padding ด้านขวา และเพิ่มด้านซ้าย */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 15px;
+    background-color: #FFB07B;
+    border: 0px;
+    width: 300px; /* ✅ ปรับขนาดความกว้างของ input */
+    text-align: left; /* ✅ ให้ข้อความชิดซ้าย */
+}
