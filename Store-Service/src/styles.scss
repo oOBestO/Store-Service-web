@@ -1,3 +1,4 @@
+
 /* You can add global styles to this file, and also import other style files */
 html {
   font-size: 14px;
@@ -47,3 +48,200 @@ body {
 // .p-steps .p-steps-item.p-highlight .p-menuitem-link .p-steps-title {
 //   color: rgb(255, 255, 255) !important; /* เปลี่ยนสีเป็นสีแดง */
 // }
+
+.header {
+  background: black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* ทำให้ header ติดกับด้านบนสุดของหน้า */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10; /* ทำให้ header อยู่เหนือเนื้อหาอื่น ๆ */
+  background-color: black; /* สีพื้นหลังเป็นสีดำ */
+  height: 50px; /* ความสูงของ header */
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.logo {
+  height: 40px;
+}
+
+.content {
+  padding: 20px;
+  text-align: center;
+}
+
+.upload-box {
+  display: flex;
+  justify-content: center; /* จัดให้อยู่ตรงกลาง */
+  width: 100%; /* กว้างเต็ม */
+}
+
+.upload-label {
+  width: 100%; /* ยืดออกซ้าย-ขวา */
+  max-width: 400px; /* จำกัดความกว้าง */
+  height: 200px; /* ขยายความสูง */
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.upload-icon {
+  font-size: 3rem !important; /* บังคับให้ไอคอนขยาย */
+  color: #000000;
+  position: absolute;
+}
+
+.hidden {
+  display: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.form-label {
+  text-align: left;
+  width: 100%; /* ให้ label เต็มความกว้างเพื่อชิดซ้าย */
+}
+
+.submit-button {
+  margin-top: 20px;
+  background: black;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%; /* ✅ ทำให้ปุ่มกว้างเต็มพื้นที่ */
+  max-width: 400px; /* ✅ กำหนดความกว้างสูงสุดเพื่อไม่ให้กว้างเกินไป */
+  display: block; /* ✅ ให้ปุ่มเป็นบล็อกเต็มบรรทัด */
+  text-align: center; /* ✅ จัดให้ข้อความอยู่ตรงกลาง */
+  border-radius: 8px; /* ✅ ทำให้มุมโค้งเล็กน้อย */
+}
+
+
+/* ✅ ทำให้พื้นหลังเป็นโปร่งใส */
+::ng-deep .p-menubar {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ✅ ซ่อนปุ่มเมนู 3 ขีด */
+::ng-deep .p-menubar-button {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+::ng-deep .transparent-menubar {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .header {
+  z-index: 1000 !important;
+}
+
+.back-button {
+  display: none; /* ✅ ลองซ่อนปุ่มเพื่อเช็คว่าเกิดจาก CSS หรือไม่ */
+}
+
+.logo-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: fixed;  /* ✅ ใช้ fixed เพื่อให้ติดมุมขวาบน */
+  top: -10px;        /* ✅ กำหนดให้อยู่ชิดขอบด้านบน */
+  right: 10px;      /* ✅ กำหนดให้อยู่ชิดขอบด้านขวา */
+  display: flex;
+  align-items: center;
+  z-index: 1000;    /* ✅ ทำให้ปุ่มอยู่เหนือองค์ประกอบอื่น */
+} 
+
+.logo {
+  height: 70px;  /* ✅ ปรับขนาดโลโก้ให้เหมาะสม */
+}
+
+.title, .subtitle {
+  text-align: left; /* จัดข้อความไปทางซ้าย */
+  width: 100%;
+}
+
+.custom-menubar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* ให้เต็มจอ */
+  background: black !important; /* เปลี่ยน BG เป็นสีดำ */
+  border: none !important; /* เอาขอบออก */
+}
+.dropdown-menu {
+  position: fixed;
+  top: 60px; /* ✅ อยู่ใต้โลโก้ */
+  right: 10px; /* ✅ ชิดขวาสุด */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 150px; /* ✅ กำหนดความกว้าง */
+  z-index: 1000;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background: #f0f0f0;
+}
+.transparent-menubar {
+  background: transparent !important; /* ✅ เปลี่ยนเมนูเป็นโปร่งใส */
+  border: none !important; /* ✅ เอาขอบออก */
+  box-shadow: none !important; /* ✅ เอาเงาออก */
+}
