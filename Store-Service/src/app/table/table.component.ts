@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // ✅ Import FormsModule
 import { PrimeNgModule } from '../app.module';
+import { HttpClient } from '@angular/common/http';
+import { GuestService } from './Service/service';
+
 
 @Component({
   selector: 'app-table',
@@ -15,13 +18,21 @@ import { PrimeNgModule } from '../app.module';
   styleUrl: './table.component.scss'
 })
 export class TableComponent {
-  tables: any[] = []; // ✅ เก็บข้อมูลของแต่ละโต๊ะ
+  table = { index: '', seats: '' }; // กำหนดค่าเริ่มต้นให้ตัวแปร table
 
-  addTable() {
-    this.tables.push({
-      checked: false, // ✅ ค่า checkbox แยกกัน
-      seats: null,    
-      count: null     
-    });
+  constructor(private http: HttpClient, private guestService: GuestService) {}
+
+  saveTable() {
+    this.guestService.saveTable(this.table).subscribe(
+      (response) => {
+        console.log('Response:', response);
+        alert('บันทึกข้อมูลสำเร็จ!');
+      },
+      (error) => {
+        console.error('Error:', error);
+        alert('มีข้อมูลโต็ะนี้อยู่แล้ว');
+      }
+    );
   }
+  
 }

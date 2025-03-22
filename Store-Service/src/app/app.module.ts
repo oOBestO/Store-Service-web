@@ -9,10 +9,13 @@ import { StepperModule } from 'primeng/stepper';
 import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReserveTableComponent } from './reserve-table/reserve-table.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ReserveTableComponent
+  ],
   imports: [
     CommonModule,
     ButtonModule,
@@ -23,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     CardModule,
     CheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ButtonModule,
@@ -33,6 +37,7 @@ import { FormsModule } from '@angular/forms';
     CardModule,
     CheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class PrimeNgModule {}

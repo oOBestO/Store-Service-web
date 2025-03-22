@@ -7,9 +7,13 @@ import { Guest } from '../interface/guest.model';
   providedIn: 'root'
 })
 export class GuestService {
-  private apiUrl = 'http://localhost:8888/api/guests';
+  private apiUrl = 'http://localhost:8888/api/tables';
 
   constructor(private http: HttpClient) {}
+
+  saveTable(table: { index: string; seats: string }): Observable<any> {
+    return this.http.post<any>(this.apiUrl, table);
+  }
 
   getGuests(): Observable<Guest[]> {
     return this.http.get<Guest[]>(this.apiUrl);

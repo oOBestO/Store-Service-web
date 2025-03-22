@@ -1,3 +1,4 @@
+/* สำหรับทุกอุปกรณ์ */
 .header {
     position: fixed;
     top: 0;
@@ -7,15 +8,14 @@
     background-color: black;
     height: 50px;
     display: flex;
-    align-items: center;  /* จัดให้อยู่ตรงกลางแนวตั้ง */
-    justify-content: flex-start; 
+    align-items: center;
 }
 
 .icon-left {
-    color: white; /* เปลี่ยนไอคอนเป็นสีขาว */
-    font-size: 24px; /* ปรับขนาดไอคอน */
-    margin-left: 15px; /* เว้นระยะห่างจากขอบซ้าย */
-    cursor: pointer; /* ทำให้กดได้ */
+    color: white;
+    font-size: 24px;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
 .column {
@@ -23,40 +23,90 @@
     top: 30px;
 }
 
-.button-container , .con {
-    position: relative;
-    top: 20px;
-}
-
 .Card {
     position: relative;
     top: 50px;
-}
-
-.pi {
-    float: right;
-}
-
-.Add {
-    font-size: 20px;
-    color: black;
-}
-
-.Box {
-    float: right;
 }
 
 .C1 {
     color: black;
 }
 
+/* สำหรับ input ภายใน Card */
 .Card input {
-    padding: 0.3rem 1rem;  /* ✅ ลด padding ด้านขวา และเพิ่มด้านซ้าย */
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding: 0.3rem 1rem;
+    margin: 0.5rem 0;
     border-radius: 15px;
     background-color: #FFB07B;
-    border: 0px;
-    width: 300px; /* ✅ ปรับขนาดความกว้างของ input */
-    text-align: left; /* ✅ ให้ข้อความชิดซ้าย */
+    border: none;
+    width: 300px;
+    text-align: left;
+}
+
+.button-container {
+    position: relative;
+    top: 20px;
+    text-align: center;
+}
+
+/* สำหรับมือถือ (ขนาดหน้าจอน้อยกว่า 600px) */
+@media (max-width: 600px) {
+    /* ปรับขนาด header ให้เล็กลง */
+    .header {
+        height: 40px;
+        padding: 10px;
+    }
+
+    .icon-left {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    /* ปรับตำแหน่งของ column */
+    .column {
+        top: 40px; /* เพิ่มพื้นที่ให้ header */
+    }
+
+    .Card {
+        top: 60px; /* เพิ่มพื้นที่ให้ header */
+    }
+
+    /* ปรับขนาด input */
+    .Card input {
+        width: 100%; /* ให้ input ยืดเต็มความกว้างของหน้าจอ */
+        font-size: 14px;
+        padding: 0.3rem 0.8rem;
+    }
+
+    /* ปรับปุ่มให้เต็มหน้าจอ */
+    .button-container {
+        width: 100%;
+    }
+
+    .button-container button {
+        width: 100%; /* ปรับให้ปุ่มยืดเต็มหน้าจอ */
+    }
+}
+
+/* สำหรับหน้าจอคอมพิวเตอร์ หรือหน้าจอที่กว้างกว่า 600px */
+@media (min-width: 601px) {
+    /* ปรับขนาด input และปุ่ม */
+    .Card {
+        display: flex;
+        flex-direction: column; /* ให้เนื้อหาจัดเรียงลงล่าง */
+        align-items: center;
+        width: 100%;
+    }
+
+    .Card input {
+        width: 300px;
+    }
+
+    .button-container button {
+        width: 300px;
+    }
+
+    .button-container {
+        padding: 20px 0;
+    }
 }

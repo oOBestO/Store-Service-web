@@ -1,0 +1,38 @@
+<header class="header">
+  <i class="pi pi-angle-double-left icon-left"></i>
+  <img src="logo.png" alt="Logo" class="logo">
+</header>
+
+<div class="heading">
+  <h1>Restaurant</h1>
+  <h2>ข้าวสวย</h2>
+</div>
+<body>
+  <section class="reservation-list">
+    <p-card *ngFor="let reservation of reservations" class="reservation-card">
+      <div class="info-card">
+        <p><strong>โต๊ะ:</strong> {{ reservation?.tableIndex ?? 'ไม่มีข้อมูล' }}</p>
+        <p><strong>ชื่อ:</strong> {{ reservation?.customerName ?? 'ไม่มีข้อมูล' }}</p>
+        <p><strong>เบอร์:</strong> {{ reservation?.phoneNumber ?? 'ไม่มีข้อมูล' }}</p>
+        <p><strong>เวลา:</strong> {{ reservation?.reservationTime ?? 'ไม่มีข้อมูล' }}</p>
+      </div>
+  
+      <!-- ✅ ปุ่ม -->
+      <div class="button-group">
+        <p-button 
+          label="ยืนยัน" 
+          styleClass="confirm" 
+          (click)="confirmReservation(reservation?.id)">
+        </p-button>
+  
+        <p-button 
+          label="ยกเลิกการจอง" 
+          styleClass="cancel" 
+          (click)="cancelReservation(reservation?.id)">
+        </p-button>
+      </div>
+    </p-card>
+  </section>
+  
+</body>
+
