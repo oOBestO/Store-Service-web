@@ -1,8 +1,3 @@
-<header class="header">
-  <i class="pi pi-angle-double-left icon-left"></i>
-  <img src="logo.png" alt="Logo" class="logo">
-</header>
-
 <div class="heading">
   <h1>Restaurant</h1>
   <h2>ข้าวสวย</h2>
@@ -18,17 +13,18 @@
       </div>
   
       <!-- ✅ ปุ่ม -->
-      <div class="button-group">
+      <div class="button-group" >
         <p-button 
           label="ยืนยัน" 
           styleClass="confirm" 
-          (click)="confirmReservation(reservation?.id)">
+          (click)="confirmReservation(reservation?.id)"
+          [style]="{'background-color': 'black', 'border': 'none', 'width' : '150px'}">
         </p-button>
-  
         <p-button 
           label="ยกเลิกการจอง" 
           styleClass="cancel" 
-          (click)="cancelReservation(reservation?.id)">
+          (click)="cancelReservation(reservation?.id)"
+          [style]="{'background-color': 'black', 'border': 'none', 'width' : '150px'}">
         </p-button>
       </div>
     </p-card>

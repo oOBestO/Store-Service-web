@@ -11,13 +11,13 @@ import { TestHomeComponent } from './testhome/testhome.component';
 
 export const routes: Routes = [
 //  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: '', component: TableComponent, pathMatch: 'full' },
-  { path: '', component: AllTableComponent, pathMatch: 'full' },
-  { path: '', component: ReserveTableComponent, pathMatch: 'full' },
-  { path: 'reservations/:tableId', component: ReservationDetailComponent },
+  { path: 'admin/addtable', component: TableComponent, pathMatch: 'full' },
+  { path: 'admin/table', component: AllTableComponent, pathMatch: 'full' },
+  { path: 'reserve', component: ReserveTableComponent, pathMatch: 'full' },
+  { path: 'reservations', component: ReservationDetailComponent },
   { path: 'table/all', component: AllTableCustomerComponent },
   { path: 'home', component: TestHomeComponent },
-  { path: '', component: TableQrComponent },
+  { path: 'admin/qr', component: TableQrComponent },
 ];
 
 @NgModule({

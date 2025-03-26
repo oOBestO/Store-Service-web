@@ -1,19 +1,6 @@
 .sud-title {
     font-size: 20px;
 }
-
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: black;
-    height: 50px;
-    display: flex;
-    align-items: center;
-}
-
 // กำหนดสีหลัก
 $primary-color: #ff7f2a;
 $text-color: #fff;
@@ -27,26 +14,7 @@ body {
   padding: 0;
 }
 
-.header {
-  background-color: #000;
-  color: $text-color;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-
-  .icon-left {
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 12px;
-  }
-
-  .logo {
-    height: 40px;
-    margin-left: auto;
-  }
-}
-
-.content {
+.content1 {
   padding: 16px;
 
   .heading {

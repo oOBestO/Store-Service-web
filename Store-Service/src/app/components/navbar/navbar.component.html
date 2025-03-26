@@ -1,0 +1,43 @@
+<nav>
+
+    <nav class="header p-4 w-full fixed top-0 left-0 z-10 flex justify-between items-center">
+        <!-- 🔹 ปุ่มย้อนกลับ -->
+        <p-button 
+        icon="pi pi-angle-double-left" 
+        class="p-button-rounded p-button-text p-button-white"
+        [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
+        (click)="goBack()">
+    </p-button>
+    
+        <!-- 🔹 ปุ่มโลโก้ -->
+        <button class="logo-button" (click)="toggleMenu()">
+            <img src="https://lh3.googleusercontent.com/d/1h8qLiCqY5WebsDwAxS9fHqifQgA-nxQM=w500"
+                 alt="Logo"
+                 class="logo">
+        </button>
+    </nav>    
+    
+
+<!-- ✅ Dropdown Menu -->
+<div *ngIf="isMenuOpen" class="dropdown-menu">
+    <ul>
+      <!-- ตั้งค่า -->
+      <li (click)="toggleSubMenu()" class="has-submenu">
+        <a href="javascript:void(0)">ตั้งค่า</a>
+        <ul class="submenu" *ngIf="isSubMenuOpen">
+          <li><a href="/admin/add-menu">เพิ่มเมนู</a></li>
+          <li><a href="/admin/edit-menu">แก้ไขเมนู</a></li>
+          <li><a href="/admin/food-list">ดูรายการอาหาร</a></li>
+          <li><a href="/admin/table-manage">จัดการการจองโต๊ะ</a></li>
+        </ul>
+      </li>
+  
+      <!-- อื่น ๆ -->
+      <li><a href="/logout">ออกจากระบบ</a></li>
+      <li><a href="/admin/qr">สร้าง QR Code</a></li>
+    </ul>
+  </div>
+  
+
+
+</nav>

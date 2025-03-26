@@ -1,15 +1,4 @@
 /* สำหรับทุกอุปกรณ์ */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: black;
-    height: 50px;
-    display: flex;
-    align-items: center;
-}
 
 .icon-left {
     color: white;
@@ -49,19 +38,6 @@
     text-align: center;
 }
 
-/* สำหรับมือถือ (ขนาดหน้าจอน้อยกว่า 600px) */
-@media (max-width: 600px) {
-    /* ปรับขนาด header ให้เล็กลง */
-    .header {
-        height: 40px;
-        padding: 10px;
-    }
-
-    .icon-left {
-        font-size: 20px;
-        margin-left: 10px;
-    }
-
     /* ปรับตำแหน่งของ column */
     .column {
         top: 40px; /* เพิ่มพื้นที่ให้ header */
@@ -86,7 +62,7 @@
     .button-container button {
         width: 100%; /* ปรับให้ปุ่มยืดเต็มหน้าจอ */
     }
-}
+
 
 /* สำหรับหน้าจอคอมพิวเตอร์ หรือหน้าจอที่กว้างกว่า 600px */
 @media (min-width: 601px) {

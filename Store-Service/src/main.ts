@@ -16,13 +16,13 @@ import { TestHomeComponent } from './app/testhome/testhome.component';
 bootstrapApplication(AppComponent, {
   providers: [provideAnimationsAsync(),
     provideRouter([
-      //{ path: '', component: TableComponent },
-      //{ path: '', component: AllTableComponent }, 
-      //{ path: '', component: ReserveTableComponent }, 
-      //{ path: '', component: ReservationDetailComponent }
-      //{ path: '', component: TableQrComponent },
-      { path: 'table/all', component: AllTableCustomerComponent },
-      { path: 'home', component: TestHomeComponent },
+      { path: 'admin/addtable', component: TableComponent },
+      { path: 'admin/table', component: AllTableComponent }, 
+      { path: 'reserve', component: ReserveTableComponent }, 
+      { path: 'reservations', component: ReservationDetailComponent },
+      { path: 'admin/qr', component: TableQrComponent },
+      //{ path: 'table/all', component: AllTableCustomerComponent },
+      //{ path: 'home', component: TestHomeComponent },
     ]),
     provideHttpClient()
   ] 

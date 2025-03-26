@@ -1,0 +1,32 @@
+<nav>
+
+    <nav class="header p-4 w-full fixed top-0 left-0 z-10 flex justify-between items-center">
+        <!-- 🔹 ปุ่มย้อนกลับ -->
+        <p-button 
+        icon="pi pi-angle-double-left" 
+        class="p-button-rounded p-button-text p-button-white"
+        [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
+        (click)="goBack()">
+    </p-button>
+    
+        <!-- 🔹 ปุ่มโลโก้ -->
+        <button class="logo-button" (click)="toggleMenu()">
+            <img src="https://lh3.googleusercontent.com/d/1h8qLiCqY5WebsDwAxS9fHqifQgA-nxQM=w500"
+                 alt="Logo"
+                 class="logo">
+        </button>
+    </nav>    
+    
+
+<!-- ✅ Dropdown Menu -->
+<div *ngIf="isMenuOpen" class="dropdown-menu">
+    <ul>
+        <li><a href="/profile">โปรไฟล์</a></li>
+        <li><a href="/settings">ตั้งค่า</a></li>
+        <li><a href="/logout">ออกจากระบบ</a></li>
+    </ul>
+</div>
+
+
+</nav>
+No newline at end of file
