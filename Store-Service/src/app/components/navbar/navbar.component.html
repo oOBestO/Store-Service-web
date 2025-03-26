@@ -23,18 +23,29 @@
     <ul>
       <!-- ตั้งค่า -->
       <li (click)="toggleSubMenu()" class="has-submenu">
-        <a href="javascript:void(0)">ตั้งค่า</a>
+        <a href="javascript:void(0)">
+          <span class="menu-left">
+            <i class="pi pi-pen-to-square"></i>
+            <span class="menu-text">เพิ่มและแก้ไข</span>
+          </span>
+          <i class="pi pi-chevron-right submenu-arrow"></i>
+        </a>
+      
         <ul class="submenu" *ngIf="isSubMenuOpen">
-          <li><a href="/admin/add-menu">เพิ่มเมนู</a></li>
-          <li><a href="/admin/edit-menu">แก้ไขเมนู</a></li>
-          <li><a href="/admin/food-list">ดูรายการอาหาร</a></li>
-          <li><a href="/admin/table-manage">จัดการการจองโต๊ะ</a></li>
+          <li><a href="">เพิ่มเมนู</a></li>
+          <li><a href="">แก้ไขเมนู</a></li>
+          <li><a href="/admin/addtable">เพิ่มโต็ะ</a></li>
+          <li><a href="/admin/table">แก้ไขโต็ะ</a></li>
         </ul>
-      </li>
+      </li>      
   
       <!-- อื่น ๆ -->
-      <li><a href="/logout">ออกจากระบบ</a></li>
-      <li><a href="/admin/qr">สร้าง QR Code</a></li>
+      <li><a href=""> <!-- ใส่ path ด้วยถ้ามี -->
+        <i class="pi pi-list"></i>  ดูรายการอาหาร</a></li>
+      <li><a href="/reservations">
+        <i class="pi pi-bars"></i>  จัดการการจองโต็ะ</a></li>
+      <li><a href="/admin/qr">
+        <i class="pi pi-qrcode"></i>  สร้าง QR Code</a></li>
     </ul>
   </div>
   
