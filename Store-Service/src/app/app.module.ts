@@ -11,10 +11,11 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReserveTableComponent } from './reserve-table/reserve-table.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
-    ReserveTableComponent
+    ReserveTableComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +28,7 @@ import { ReserveTableComponent } from './reserve-table/reserve-table.component';
     CheckboxModule,
     FormsModule,
     ReactiveFormsModule,
+    QRCodeModule
   ],
   exports: [
     ButtonModule,
@@ -38,6 +40,7 @@ import { ReserveTableComponent } from './reserve-table/reserve-table.component';
     CheckboxModule,
     FormsModule,
     ReactiveFormsModule,
+    QRCodeModule
   ]
 })
 export class PrimeNgModule {}

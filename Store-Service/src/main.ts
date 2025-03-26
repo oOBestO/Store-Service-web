@@ -9,6 +9,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AllTableComponent } from './app/all-table/all-table.component';
 import { ReserveTableComponent } from './app/reserve-table/reserve-table.component';
 import { ReservationDetailComponent } from './app/reservation-detail/reservation-detail.component';
+import { TableQrComponent } from './app/table-qr/table-qr.component';
+import { AllTableCustomerComponent } from './app/all-table-customer/all-table-customer.component';
+import { TestHomeComponent } from './app/testhome/testhome.component';
 
 bootstrapApplication(AppComponent, {
   providers: [provideAnimationsAsync(),
@@ -16,8 +19,11 @@ bootstrapApplication(AppComponent, {
       //{ path: '', component: TableComponent },
       //{ path: '', component: AllTableComponent }, 
       //{ path: '', component: ReserveTableComponent }, 
-      { path: '', component: ReservationDetailComponent }
+      //{ path: '', component: ReservationDetailComponent }
+      //{ path: '', component: TableQrComponent },
+      { path: 'table/all', component: AllTableCustomerComponent },
+      { path: 'home', component: TestHomeComponent },
     ]),
     provideHttpClient()
-  ]
+  ] 
 });

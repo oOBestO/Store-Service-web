@@ -3,20 +3,25 @@ import { GuestService } from './Service/service';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../app.module';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-all-table',
+  selector: 'app-all-table-customer', // ✅ เปลี่ยน selector ให้ตรงกับชื่อใหม่
   standalone: true,
   imports: [CommonModule, PrimeNgModule],
-  templateUrl: './all-table.component.html',
-  styleUrl: './all-table.component.scss',
+  templateUrl: './all-table-customer.component.html', // ✅ อัปเดตชื่อไฟล์ HTML
+  styleUrl: './all-table-customer.component.scss', // ✅ อัปเดตชื่อไฟล์ SCSS
   providers: [MessageService],
 })
-export class AllTableComponent {
+export class AllTableCustomerComponent {
   tables: any[] = [];
   seatGroups: { seats: number; tables: any[] }[] = [];
 
-  constructor(private guestService: GuestService, private messageService: MessageService) {}
+  constructor(
+    private guestService: GuestService,
+    private messageService: MessageService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadTables();
@@ -64,7 +69,6 @@ export class AllTableComponent {
       (error) => console.error('Error loading image:', error)
     );
   }
-  
 
   // ✅ จัดกลุ่มโต๊ะตามจำนวนที่นั่ง
   groupBySeats() {
@@ -83,22 +87,8 @@ export class AllTableComponent {
     }));
   }
 
-  // ✅ ลบโต๊ะตาม id (โดยไม่จัดเรียงใหม่)
-  deleteTable(id: number) {
-    if (confirm('คุณต้องการลบโต๊ะนี้หรือไม่?')) {
-      this.guestService.deleteTable(id).subscribe(
-        () => {
-          this.messageService.add({ severity: 'success', summary: 'สำเร็จ', detail: 'ลบโต๊ะสำเร็จ' });
-
-          // ✅ โหลดข้อมูลใหม่จากฐานข้อมูลหลังจากลบ
-          this.loadTables();
-        },
-        (error) => {
-          console.error('❌ เกิดข้อผิดพลาดในการลบโต๊ะ:', error);
-          this.messageService.add({ severity: 'error', summary: 'ผิดพลาด', detail: 'ไม่สามารถลบโต๊ะได้' });
-        }
-      );
-    }
+  // ✅ ฟังก์ชันสั่งอาหาร
+  orderFood(tableId: number) {
+    this.router.navigate(['/home'], { queryParams: { tableId: tableId } });
   }
-
 }
