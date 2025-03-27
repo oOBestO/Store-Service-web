@@ -30,10 +30,11 @@ export class TableComponent {
       return;
     }
 
-    if (index > 300) {
-      alert('เลขโต๊ะต้องไม่เกิน 300');
+    if (!index || index < 1 || index > 300) {
+      alert('เลขโต๊ะต้องอยู่ระหว่าง 1 ถึง 300');
       return;
     }
+    
     
     this.guestService.saveTable(this.table).subscribe(
       (response) => {
