@@ -34,4 +34,8 @@ export class TableService {
     return this.http.post('http://localhost:8888/api/tables/reserve', data);
   }
   
+  getAvailableTablesByTime(start: string, end: string) {
+    return this.http.get<any[]>(`http://localhost:8888/api/reservations/available?start=${start}&end=${end}`);
+  }  
+  
 }

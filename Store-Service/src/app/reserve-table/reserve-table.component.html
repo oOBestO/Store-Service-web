@@ -1,13 +1,11 @@
 <div class="reserve-form">
   <h1>จองโต๊ะ</h1>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- เลือกโต๊ะ -->
+    <!-- เลือกเวลา -->
     <div class="form-group">
-      <label>โต๊ะ</label>
-      <select formControlName="tableId" required>
-        <option *ngFor="let table of tables" [value]="table.id">
-          โต๊ะ {{ table.index }} ({{ table.seats }} ที่นั่ง)
-        </option>
+      <label>เวลา</label>
+      <select formControlName="reservationTime" required>
+        <option *ngFor="let time of times" [value]="time">{{ time }}</option>
       </select>
     </div>
 
@@ -23,11 +21,13 @@
       <input type="tel" formControlName="phoneNumber" required />
     </div>
 
-    <!-- เลือกเวลา -->
+    <!-- เลือกโต๊ะ -->
     <div class="form-group">
-      <label>เวลา</label>
-      <select formControlName="reservationTime" required>
-        <option *ngFor="let time of times" [value]="time">{{ time }}</option>
+      <label>โต๊ะ</label>
+      <select formControlName="tableId" required>
+        <option *ngFor="let table of tables" [value]="table.id">
+          โต๊ะ {{ table.index }} ({{ table.seats }} ที่นั่ง)
+        </option>
       </select>
     </div>
 
