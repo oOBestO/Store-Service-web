@@ -13,14 +13,18 @@
         <ng-template pTemplate="content">
           <div class="table-content">
             <!-- ✅ แสดงรูปจาก Base64 -->
-            <div class="table-icon">
-              <img *ngIf="table.image" [src]="table.image" alt="โต๊ะที่ {{ table.index }}" />
-              <span *ngIf="!table.image">ไม่มีรูป</span>
+            <div class="table-icon" style="display: flex; align-items: center; gap: 1rem;">
+              <img
+                *ngIf="table.image"
+                [src]="table.image"
+                (error)="table.image = 'assets/images/table/default.png'"
+                alt="โต๊ะที่ {{ table.index }}"
+                style="width: 80px; height: auto; border: 1px solid black;"
+              />
             </div>
-  
             <!-- ✅ ข้อมูลโต๊ะ -->
-            <div class="table-info">
-              <h4>โต๊ะที่ : {{ table.index }}</h4>
+            <div class="table-info" style="display: flex; flex-direction: column; justify-content: center;">
+              <h4 style="margin: 0 0 0.5rem 0;">โต๊ะที่ : {{ table.index }}</h4>
               <p-button (click)="orderFood(table.id)"[style]="{'background-color': 'black', 'border': 'none'}">🍽️ สั่งอาหาร</p-button>
             </div>
           </div>

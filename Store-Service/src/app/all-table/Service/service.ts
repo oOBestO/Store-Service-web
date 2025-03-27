@@ -42,7 +42,9 @@
       return this.http.put<Guest>(`${this.apiUrl}/${tableId}`, tableData);
     }
 
-    getTableImage(index: number): Observable<Blob> {
-      return this.http.get(`http://localhost:8888/api/tables/image/${index}`, { responseType: 'blob' });
-    }    
+    // guestService.ts
+getTableImage(index: string): Observable<string> {
+  return this.http.get(`http://localhost:8888/api/images/${index}`, { responseType: 'text' });
+}
+   
   }

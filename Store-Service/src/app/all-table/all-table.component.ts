@@ -28,21 +28,19 @@ export class AllTableComponent {
       .subscribe(
         async (data) => {
           console.log("📌 ข้อมูลจาก API:", data);
-  
+
           if (data) {
             this.tables = data.sort((a, b) => a.index - b.index);
-  
+
             await Promise.all(
               this.tables.map(async (table) => {
                 if (table.index != null) {
-                  table.image = await this.loadImage(table.index);
-                } else {
-                  console.warn("⚠️ โต๊ะไม่มี index:", table);
+                  table.image = await this.loadImage(String(table.index));
                 }
               })
             );
-  
-            this.groupBySeats(); 
+
+            this.groupBySeats();
           } else {
             console.warn('⚠️ No table data found');
           }
@@ -52,19 +50,12 @@ export class AllTableComponent {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load tables' });
         }
       );
-  }   
-
-  // ✅ โหลดรูปภาพจาก table_number
-  loadImage(index: number) {
-    this.guestService.getTableImage(index).subscribe(
-      (blob) => {
-        const objectURL = URL.createObjectURL(blob);
-        this.tables.find((t) => t.index === index).imageUrl = objectURL;
-      },
-      (error) => console.error('Error loading image:', error)
-    );
   }
-  
+
+  // ✅ สร้าง path รูปภาพจาก index → assets/images/table/table_<index>.png
+  async loadImage(index: string): Promise<string> {
+    return `assets/images/table/table_${index}.png`;
+  }
 
   // ✅ จัดกลุ่มโต๊ะตามจำนวนที่นั่ง
   groupBySeats() {
@@ -83,15 +74,13 @@ export class AllTableComponent {
     }));
   }
 
-  // ✅ ลบโต๊ะตาม id (โดยไม่จัดเรียงใหม่)
+  // ✅ ลบโต๊ะตาม id
   deleteTable(id: number) {
     if (confirm('คุณต้องการลบโต๊ะนี้หรือไม่?')) {
       this.guestService.deleteTable(id).subscribe(
         () => {
           this.messageService.add({ severity: 'success', summary: 'สำเร็จ', detail: 'ลบโต๊ะสำเร็จ' });
-
-          // ✅ โหลดข้อมูลใหม่จากฐานข้อมูลหลังจากลบ
-          this.loadTables();
+          this.loadTables(); // โหลดใหม่
         },
         (error) => {
           console.error('❌ เกิดข้อผิดพลาดในการลบโต๊ะ:', error);
@@ -100,5 +89,4 @@ export class AllTableComponent {
       );
     }
   }
-
 }

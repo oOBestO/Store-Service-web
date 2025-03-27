@@ -23,6 +23,18 @@ export class TableComponent {
   constructor(private http: HttpClient, private guestService: GuestService) {}
 
   saveTable() {
+    const index = Number(this.table.index);
+    const seats = Number(this.table.seats);
+    if (!Number.isInteger(index) || !Number.isInteger(seats)) {
+      alert('กรุณากรอกข้อมูลเป็นเลขจำนวนเต็มเท่านั้น');
+      return;
+    }
+
+    if (index > 300) {
+      alert('เลขโต๊ะต้องไม่เกิน 300');
+      return;
+    }
+    
     this.guestService.saveTable(this.table).subscribe(
       (response) => {
         console.log('Response:', response);

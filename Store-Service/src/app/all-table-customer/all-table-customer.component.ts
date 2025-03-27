@@ -40,9 +40,7 @@ export class AllTableCustomerComponent {
             await Promise.all(
               this.tables.map(async (table) => {
                 if (table.index != null) {
-                  table.image = await this.loadImage(table.index);
-                } else {
-                  console.warn("⚠️ โต๊ะไม่มี index:", table);
+                  table.image = await this.loadImage(String(table.index));
                 }
               })
             );
@@ -59,15 +57,8 @@ export class AllTableCustomerComponent {
       );
   }   
 
-  // ✅ โหลดรูปภาพจาก table_number
-  loadImage(index: number) {
-    this.guestService.getTableImage(index).subscribe(
-      (blob) => {
-        const objectURL = URL.createObjectURL(blob);
-        this.tables.find((t) => t.index === index).imageUrl = objectURL;
-      },
-      (error) => console.error('Error loading image:', error)
-    );
+  async loadImage(index: string): Promise<string> {
+    return `assets/images/table/table_${index}.png`;
   }
 
   // ✅ จัดกลุ่มโต๊ะตามจำนวนที่นั่ง

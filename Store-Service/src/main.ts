@@ -21,8 +21,8 @@ bootstrapApplication(AppComponent, {
       { path: 'reserve', component: ReserveTableComponent }, 
       { path: 'reservations', component: ReservationDetailComponent },
       { path: 'admin/qr', component: TableQrComponent },
-      //{ path: 'table/all', component: AllTableCustomerComponent },
-      //{ path: 'home', component: TestHomeComponent },
+      { path: 'table/all', component: AllTableCustomerComponent },
+      { path: 'home', component: TestHomeComponent },
     ]),
     provideHttpClient()
   ] 
