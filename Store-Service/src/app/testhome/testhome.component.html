@@ -1,0 +1,10 @@
+<div class="test-home-container">
+    <h1>🍽️ Test Home Page {{ index }}</h1>
+  
+    <!-- ✅ แสดงหมายเลขโต๊ะที่กำลังสั่งอาหาร -->
+    <div *ngIf="tableId">
+      <h2>คุณกำลังสั่งอาหารจากโต๊ะที่: {{ tableId }}</h2>
+      <button>✅ ยืนยันการสั่งอาหาร</button>
+    </div>
+  </div>
+  

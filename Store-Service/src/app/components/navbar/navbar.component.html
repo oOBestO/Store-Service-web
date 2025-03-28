@@ -11,7 +11,7 @@
     
         <!-- 🔹 ปุ่มโลโก้ -->
         <button class="logo-button" (click)="toggleMenu()">
-            <img src="https://lh3.googleusercontent.com/d/1h8qLiCqY5WebsDwAxS9fHqifQgA-nxQM=w500"
+            <img src="https://res.cloudinary.com/dybo3empi/image/upload/v1743093978/S_1-Photoroom_t50yex.png"
                  alt="Logo"
                  class="logo">
         </button>
@@ -21,11 +21,34 @@
 <!-- ✅ Dropdown Menu -->
 <div *ngIf="isMenuOpen" class="dropdown-menu">
     <ul>
-        <li><a href="/profile">โปรไฟล์</a></li>
-        <li><a href="/settings">ตั้งค่า</a></li>
-        <li><a href="/logout">ออกจากระบบ</a></li>
+      <!-- ตั้งค่า -->
+      <li (click)="toggleSubMenu()" class="has-submenu">
+        <a href="javascript:void(0)">
+          <span class="menu-left">
+            <i class="pi pi-pen-to-square"></i>
+            <span class="menu-text">เพิ่มและแก้ไข</span>
+          </span>
+          <i class="pi pi-chevron-right submenu-arrow"></i>
+        </a>
+      
+        <ul class="submenu" *ngIf="isSubMenuOpen">
+          <li><a href="">เพิ่มเมนู</a></li>
+          <li><a href="">แก้ไขเมนู</a></li>
+          <li><a href="/admin/addtable">เพิ่มโต็ะ</a></li>
+          <li><a href="/admin/table">แก้ไขโต็ะ</a></li>
+        </ul>
+      </li>      
+  
+      <!-- อื่น ๆ -->
+      <li><a href=""> <!-- ใส่ path ด้วยถ้ามี -->
+        <i class="pi pi-list"></i>  ดูรายการอาหาร</a></li>
+      <li><a href="/reservations">
+        <i class="pi pi-bars"></i>  จัดการการจองโต็ะ</a></li>
+      <li><a href="/admin/qr">
+        <i class="pi pi-qrcode"></i>  สร้าง QR Code</a></li>
     </ul>
-</div>
+  </div>
+  
 
 
 </nav>

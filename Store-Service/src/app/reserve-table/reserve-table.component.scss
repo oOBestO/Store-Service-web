@@ -1,0 +1,64 @@
+.reserve-form {
+  position: relative;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: #ff6600;
+        outline: none;
+      }
+    }
+  }
+
+  button {
+    position: relative;
+    top: 30px;
+    background-color: #ffffff;
+    color: #000000;
+    border: #000000;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #e65c00;
+    }
+
+    &:disabled {
+      background-color: #000000;
+      color: #ffffff;
+      cursor: not-allowed;
+    }
+  }
+}

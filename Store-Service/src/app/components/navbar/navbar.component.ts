@@ -51,10 +51,13 @@ export class NavbarComponent {
     }
     // ✅ ฟังก์ชันที่ทำงานเมื่อคลิกโลโก้
       isMenuOpen = false; // ✅ สร้างตัวแปรเก็บสถานะของเมนู
-  
+      isSubMenuOpen = false;
+      
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen
     }
-    
+    toggleSubMenu() {
+      this.isSubMenuOpen = !this.isSubMenuOpen;
+    }
   }
 
