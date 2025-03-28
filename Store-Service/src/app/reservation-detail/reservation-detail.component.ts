@@ -32,22 +32,19 @@ export class ReservationDetailComponent implements OnInit {
           id: reservation.id ?? null,
           customerName: reservation.customerName ?? 'ไม่มีข้อมูล',
           phoneNumber: reservation.phoneNumber ?? 'ไม่มีข้อมูล',
-          reservationTime: reservation.reservationTime ?? 'ไม่มีข้อมูล',
-          tableIndex: reservation.table?.index ?? reservation.tableIndex ?? 'ไม่มีข้อมูล', // ✅ ดึงค่า tableIndex ให้ถูกต้อง
+          timeStart: reservation.startTime ?? 'ไม่มีข้อมูล',
+          timeEnd: reservation.endTime ?? 'ไม่มีข้อมูล',
+          tableIndex: reservation.table?.index ?? reservation.tableIndex ?? 'ไม่มีข้อมูล',
           table: reservation.table ? {
             id: reservation.table.id ?? null,
             index: reservation.table.index ?? reservation.tableIndex ?? 'ไม่มีข้อมูล',
             seats: reservation.table.seats ?? 'ไม่มีข้อมูล'
           } : null
-        }));
+        }));        
       },
       (error) => console.error('❌ Error loading reservations:', error)
     );
   }  
-
-  confirmReservation(id: number): void {
-    alert(`✅ การจองโต๊ะที่ ${id} ได้รับการยืนยันแล้ว!`);
-  }
 
   cancelReservation(id: number): void {
     if (confirm('คุณต้องการยกเลิกการจองนี้ใช่ไหม?')) {
