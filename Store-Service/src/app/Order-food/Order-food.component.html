@@ -12,6 +12,50 @@
     />
   </div>
 </div>
-<h1>Order</h1>
-<p-button label="Search" icon="pi-chevron-right" (onClick)="butTonnext()" />
+<div class="order-container">
+
+  <!-- Card ใหญ่ สำหรับ Order -->
+  <div class="order-card">
+    <h2 class="title">รายการสั่งอาหาร</h2>
+
+    <div *ngFor="let menu of fontList; let i = index" class="menu-card">
+      <div class="menu-details">
+        <h3>{{ menu.menuName }}</h3>
+        <div class="quantity-control">
+          <button class="qty-btn" (click)="decreaseQuantity(menu)">-</button>
+          <span class="qty">{{ menu.quantity }}</span>
+          <button class="qty-btn" (click)="increaseQuantity(menu)">+</button>
+        </div>
+      </div>
+      <button class="delete-btn" (click)="removeMenu(i)">🗑</button>
+    </div>
+    <div class="button-container">
+      <!-- ปุ่มเพิ่มรายการ -->
+      <button class="btn add-btn" (click)="openSelectMenuModal()">เพิ่มรายการ</button>
+      <!-- ปุ่มยืนยัน -->
+      <button class="btn confirm-btn" (click)="butTonnext()">ยืนยัน</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal แสดงเมนูทั้งหมดจาก Database -->
+<div class="modal" *ngIf="showSelectMenuModal">
+  <div class="modal-content">
+    <h3>เลือกเมนูจากฐานข้อมูล</h3>
+    <div class="menu-list">
+      <div *ngFor="let menu of allMenus" class="menu-option" (click)="addMenuToOrder(menu)">
+        <img [src]="menu.imageUrl" class="menu-img">
+        <div>
+          <h4>{{ menu.menuName }}</h4>
+          <p>ราคา {{ menu.price }} ฿</p>
+        </div>
+      </div>
+    </div>
+    <button class="close-modal" (click)="showSelectMenuModal = false">ปิด</button>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <p class="empty-message">ยังไม่มีรายการสั่งอาหาร</p>
+</ng-template>
 

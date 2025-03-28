@@ -1,0 +1,68 @@
+<div class="container">
+  <!-- Title -->
+  <h1 class="main-title">Restaurant Custom</h1>
+  <h2 class="subtitle">ข้าวสวย</h2>
+
+  <!-- ใช้ *ngIf เพื่อสลับระหว่าง แก้ไข กับ เพิ่มเมนูใหม่ -->
+  <div *ngIf="id; else noMenuEdit">
+    <div class="image-upload">
+      <label for="file-input">
+        <img *ngIf="menuEdit.imageUrl; else defaultImage" [src]="menuEdit.imageUrl" class="preview-image">
+        <ng-template #defaultImage>
+          <div class="default-image">
+            <img src="assets/default-icon.png" class="icon">
+            <span class="plus-icon">+</span>
+          </div>
+        </ng-template>
+      </label>
+      <input type="file" id="file-input" (change)="onFileSelectedEdit($event)" accept="image/*">
+    </div>
+
+    <!-- Form -->
+    <div class="form-container">
+      <label for="menu-name">ชื่อรายการ</label>
+      <input type="text" id="category" [(ngModel)]="menuEdit.category" class="input-box" placeholder="ชื่อรายการ">
+
+      <label for="menu-name">ชื่อเมนู</label>
+      <input type="text" id="menu-name" [(ngModel)]="menuEdit.menuName" class="input-box" placeholder="ชื่อเมนู">
+
+      <label for="menu-price">ราคา</label>
+      <input type="number" id="menu-price" [(ngModel)]="menuEdit.price" class="input-box" placeholder="ราคา">
+    </div>
+
+    <!-- ปุ่มยืนยัน -->
+    <div class="button-group">
+      <button (click)="confirm()" class="btn confirm-btn">ยืนยัน</button>
+    </div>
+  </div>
+
+  <!-- ถ้า menuEdit ไม่มีค่า ให้แสดงฟอร์มเพิ่มเมนูใหม่ -->
+  <ng-template #noMenuEdit>
+    <div class="image-upload">
+      <label for="file-input">
+        <img *ngIf="imageUrl; else defaultImage" [src]="imageUrl" class="preview-image">
+        <ng-template #defaultImage>
+          <div class="default-image">
+            <img src="assets/default-icon.png" class="icon">
+            <span class="plus-icon">+</span>
+          </div>
+        </ng-template>
+      </label>
+      <input type="file" id="file-input" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+
+    <!-- Form -->
+    <div class="form-container">
+      <label for="menu-name">ชื่อเมนู</label>
+      <input type="text" id="menu-name" [(ngModel)]="menuName" class="input-box" placeholder="ชื่อเมนู">
+
+      <label for="menu-price">ราคา</label>
+      <input type="number" id="menu-price" [(ngModel)]="menuPrice" class="input-box" placeholder="ราคา">
+    </div>
+
+    <!-- ปุ่มยืนยัน -->
+    <div class="button-group">
+      <button (click)="confirm()" class="btn confirm-btn">ยืนยัน</button>
+    </div>
+  </ng-template>
+</div>

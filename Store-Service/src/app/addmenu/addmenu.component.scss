@@ -93,12 +93,13 @@ label {
 }
 
 .btn {
-  padding: 10px 15px;
+  flex: 1; /* ให้ปุ่มขยายขนาดตาม Card */
+  padding: 8px 12px;
   border: none;
   border-radius: 5px;
-  font-size: 14px;
   cursor: pointer;
-  min-width: 120px;
+  font-size: 14px;
+  text-align: center;
 }
 
 .add-btn {
@@ -140,3 +141,58 @@ label {
   font-weight: bold;
   cursor: pointer;
 }
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* ให้เนื้อหาจัดเรียงลงล่าง */
+  align-items: center;
+  width: 100%;
+}
+
+.card-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+.price {
+  font-weight: bold;
+  color: green;
+}
+.card-body {
+  width: 100%;
+  text-align: center;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: space-between; /* ให้ปุ่มแยกซ้าย-ขวา */
+  align-items: center;
+  flex-wrap: wrap; /* ป้องกันปุ่มล้นออกจาก Card */
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: black;
+  max-width: 45%; /* ป้องกันปุ่มขยายเต็ม Card */
+}
+
+.delete-btn {
+  background: #f44336;
+  color: white;
+  max-width: 45%;
+}
+

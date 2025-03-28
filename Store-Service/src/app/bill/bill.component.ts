@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router} from '@angular/router';
 import { MenuItem } from 'primeng/api/menuitem';
 import { MessageService } from 'primeng/api';
 import { PrimeNgModule } from '../app.module';
+import { FontMenu } from './interface/guest.model';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-bill',
@@ -18,12 +20,16 @@ export class BillComponent {
     activeIndex: number = 1;
       items: MenuItem[] | undefined;
       customClass = 'text-yellow';
+      fontList: FontMenu[] = [];
+      drinkList: FontMenu[] = [];
+      totalCost: number = 0;
+      tableNumber: number = 1; // สมมุติว่าเป็นโต๊ะที่ 1
 
       onActiveIndexChange(event: number) {
         this.activeIndex = event;
     }
 
-        constructor(private router: Router,public messageService: MessageService) {
+        constructor(private router: Router,public messageService: MessageService,public dataService :DataService) {
         } // Inject Service
 
       ngOnInit(): void {
@@ -53,11 +59,18 @@ export class BillComponent {
             }
           }
         ];
+      const savedOrder = localStorage.getItem('orderData');
+      if (savedOrder) {
+        this.fontList = JSON.parse(savedOrder);
+        console.log("✅ หน้า bill กู้คืนข้อมูลจาก localStorage:", this.fontList);
       }
+
+    // คำนวณราคารวม
+    this.totalCost = [...this.fontList].reduce((sum, item) => sum + item.price * item.quantity, 0);
+  }
+
       butTonnext(){
-        this.router.navigate(['/payment']);
-      }
-      butTonleft(){
-        this.router.navigate(['/order']);
+        console.log('totalCost',this.totalCost)
+        this.router.navigate(['/payment'] , { queryParams: {totalCost: this.totalCost }})
       }
 }

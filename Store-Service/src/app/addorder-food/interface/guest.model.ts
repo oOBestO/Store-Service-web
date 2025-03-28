@@ -1,18 +1,16 @@
-export interface Guest {
-  name: string;
-  email: string;
-}
+
 export interface MenuItems {
-  id: number;
-  name: string;
+  menuName: string;
   price: number;
   category: string;
-  imageUrl: string;
-  recommended: boolean;
+  imageUrl? : string;
 }
 
+export interface imageUrl{
+  imageFile : string
+}
 export interface Menu {
-  id: number;
+  id?: number;
   menuName: string;
   price: number;
   imageUrl: string;

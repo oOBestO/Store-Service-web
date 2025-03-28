@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { QRCodeModule } from 'angularx-qrcode';
 
 
+
+
 @NgModule({
   declarations: [],
   imports: [

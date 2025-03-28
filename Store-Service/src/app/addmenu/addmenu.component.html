@@ -1,11 +1,5 @@
 <div class="container">
   <!-- Header -->
-  <div class="header">
-    <button class="back-btn">⬅️</button>
-    <span class="title">เพิ่มเมนู และ เปลี่ยนแปลงเมนู</span>
-    <img src="assets/logo.png" alt="Logo" class="logo">
-  </div>
-
   <!-- Title -->
   <h1 class="main-title">Restaurant Custom</h1>
   <h2 class="subtitle">ข้าวสวย</h2>
@@ -18,14 +12,24 @@
     <!-- ปุ่มเพิ่มรายการ & ลบหมวดหมู่ -->
     <div class="button-group">
       <button (click)="addItem()" class="btn add-btn">เพิ่มรายการ</button>
-      <button (click)="removeCategory()" class="btn delete-btn">ลบหมวดหมู่</button>
     </div>
 
     <!-- รายการเมนู -->
-    <ul class="menu-list">
-      <li *ngFor="let item of menuItems" class="menu-item">{{ item }}</li>
-    </ul>
+  <!-- แสดงรายการเมนูที่บันทึก -->
+  <div class="menu-list">
+    <div class="card" *ngFor="let menu of menuItems">
+      <img [src]="menu.imageUrl" class="card-image" alt="รูปเมนู">
+      <div class="card-body">
+        <h3>{{ menu.menuName }}</h3>
+        <p class="price">฿{{ menu.price }}</p>
+        <div class="card-buttons">
+          <button (click)="editMenu(menu)" class="btn edit-btn">แก้ไข</button>
+          <button (click)="deleteMenu(menu.id)" class="btn delete-btn">ลบ</button>
+        </div>
+      </div>
+    </div>
   </div>
+
 
   <!-- ปุ่มยืนยัน -->
   <button (click)="confirm()" class="btn confirm-btn">ยืนยัน</button>

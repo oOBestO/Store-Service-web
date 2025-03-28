@@ -1,10 +1,11 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { GuestService } from './Service/service';  // นำเข้า Service
-import { Guest ,MenuItems } from './interface/guest.model';  // นำเข้า Model
+import { Menu } from './interface/guest.model';  // นำเข้า Model
 import { PrimeNgModule } from '../app.module';
 import { CommonModule } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service'; // ✅ นำเข้า Service
 
 @Component({
   selector: 'app-home',
@@ -20,87 +21,51 @@ import { Router } from '@angular/router';
 })
 
 export class HomeComponent implements OnInit {
-  qrData: string = "https://mywebsite.com";
-  qrSize: number = 250;
-  [x: string]: any;
-  guests: Guest[] = [];
-  date: Date = new Date();
-  currentStep: number = 1;
-  items: MenuItem[] | undefined;
-  activeIndex: number = 0;
-  customClass = 'text-yellow';
-  menuItems: MenuItems[] = [];
-  categories: string[] = ['กะเพรา', 'ข้าวผัด', 'เครื่องดื่ม'];
+  menus: Menu[] = [];
+  groupedMenus: { [category: string]: Menu[] } = {};
+  selectedMenus: number[]=[] // ✅ ใช้ `Set` เพื่อเก็บ ID ของเมนูที่ถูกเลือก
+  categoryKeys: string[] = []; // ✅ ใช้ตัวแปรเก็บ key ของหมวดหมู่
+  randomMenus: Menu[] = []; // ✅ เมนูแนะนำที่ถูกสุ่ม
 
-  onActiveIndexChange(event: number) {
-    this.activeIndex = event;
-}
+  constructor(private getAllMenus: GuestService, private router: Router,private dataService: DataService) {}
 
-  constructor(private guestService: GuestService,public messageService: MessageService,private router: Router) {
-  } // Inject Service
+  ngOnInit() {
+    this.getAllMenus.getAllMenus().subscribe(data => {
+      this.menus = data;
+      this.groupMenusByCategory();
+      this.getRandomMenus();
 
-  ngOnInit(): void {
-    this.addNewGuest(); // โหลดข้อมูลเมื่อ Component ทำงาน
-    this.guestService.getMenu().subscribe(data => {
-      this.menuItems = data;
     });
-    this.items = [
-      {
-        label: 'รายการอาหาร',
-        command: (event: any) => {
-          this.router.navigate(['/order']); // ✅ ใช้ this.router อย่างถูกต้อง
-        }
-      },
-      {
-        label: 'บิลค่าอาหาร',
-        command: (event: any) => {
-          this.router.navigate(['/bill']);
-        }
-      },
-      {
-        label: 'ชำระเงิน',
-        command: (event: any) => {
-          this.router.navigate(['/payment']);
-        }
-      },
-      {
-        label: 'ชำระเงินเสร็จสิ้น',
-        command: (event: any) => {
-          this.router.navigate(['/success']);
-        }
+  }
+
+
+  groupMenusByCategory() {
+    this.groupedMenus = this.menus.reduce((acc, menu) => {
+      if (!acc[menu.category]) {
+        acc[menu.category] = [];
       }
-    ];
+      acc[menu.category].push(menu);
+      return acc;
+    }, {} as { [category: string]: Menu[] });
+    this.categoryKeys = Object.keys(this.groupedMenus); // ✅ ใช้ตัวแปรแทน Object.keys()
   }
 
-  getItemsByCategory(category: string): MenuItems[] {
-    return this.menuItems.filter(item => item.category === category);
+  getRandomMenus() {
+    const shuffledMenus = [...this.menus].sort(() => 0.5 - Math.random());
+    this.randomMenus = shuffledMenus.slice(0, 3); // ✅ เลือก 3 เมนูแบบสุ่ม
   }
 
-  getRecommendedItems(): MenuItems[] {
-     return this.menuItems.filter(i => i.recommended);
+  toggleSelection(menu: Menu) {
+    if (this.selectedMenus.some(m => m === menu.id)) {
+      this.selectedMenus = this.selectedMenus.filter(m => m !== menu.id); // ✅ เอาออกถ้าถูกเลือกซ้ำ
+    } else {
+      this.selectedMenus.push(menu.id); // ✅ เพิ่มเข้า Array ถ้าไม่ซ้ำ
+    }
   }
 
-  linkpage(){
-    this.router.navigate(['/addmenu']);
-  }
-
-  // ดึงข้อมูล Guest ทั้งหมดจาก API
-  getAllGuests() {
-    this.guestService.getGuests().subscribe((data) => {
-      this.guests = data;
-      console.log(this.guests);
-    });
-  }
-
-  // ส่งข้อมูล Guest ใหม่ไปยัง API
-  addNewGuest() {
-    const newGuest: Guest = {
-      name: 'Michael',
-      email: 'michael@email.com'
-    };
-    this.guestService.addGuest(newGuest).subscribe((response) => {
-      console.log('เพิ่ม Guest สำเร็จ:', response);
-      this.getAllGuests(); // โหลดข้อมูลใหม่
-    });
+  confirmSelection() {
+    console.log("📌 ส่งเมนู:", this.selectedMenus);
+    this.dataService.setMenus(this.selectedMenus);
+    this.router.navigate(['/order']);
   }
 }

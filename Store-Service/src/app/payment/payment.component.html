@@ -12,6 +12,32 @@
     />
   </div>
 </div>
-<p>payment works!</p>
-<p-button label="Search" icon="pi-chevron-right" (onClick)="butTonnext()" />
-<p-button label="Search" icon="pi-chevron-left" (onClick)="butTonleft()" />
+<div class="payment-container">
+  <h2 class="title">เลือกวิธีการชำระเงิน</h2>
+
+  <div class="payment-card">
+    <h3>โต๊ะ {{ tableNumber }}</h3>
+
+    <!-- เลือกวิธีการชำระเงิน -->
+    <div class="payment-methods">
+      <label>
+        <input type="radio" name="payment" [(ngModel)]="selectedPayment" value="cash">
+        ชำระเงินสด
+      </label>
+
+      <label>
+        <input type="radio" name="payment" [(ngModel)]="selectedPayment" value="qr">
+        ชำระ QR Code
+      </label>
+    </div>
+
+    <!-- แสดง QR Code เมื่อเลือก "ชำระ QR Code" -->
+    <div *ngIf="selectedPayment === 'qr'" class="qr-section">
+      <h3>Cost: <span class="cost">{{ totalCost }} ฿</span></h3>
+      <img src="{{ qrCodeUrl }}" alt="QR Code" class="qr-code">
+    </div>
+
+    <!-- ปุ่มยืนยัน -->
+    <button class="btn confirm-btn" (click)="confirmPayment()">ยืนยันชำระเงิน</button>
+  </div>
+</div>

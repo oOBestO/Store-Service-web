@@ -1,12 +1,9 @@
-export interface Guest {
-  name: string;
-  email: string;
-}
-export interface MenuItems {
+
+
+export interface Menu {
   id: number;
-  name: string;
+  menuName: string;
   price: number;
   category: string;
   imageUrl: string;
-  recommended: boolean;
 }
