@@ -9,22 +9,16 @@
         <p><strong>โต๊ะ:</strong> {{ reservation?.tableIndex ?? 'ไม่มีข้อมูล' }}</p>
         <p><strong>ชื่อ:</strong> {{ reservation?.customerName ?? 'ไม่มีข้อมูล' }}</p>
         <p><strong>เบอร์:</strong> {{ reservation?.phoneNumber ?? 'ไม่มีข้อมูล' }}</p>
-        <p><strong>เวลา:</strong> {{ reservation?.reservationTime ?? 'ไม่มีข้อมูล' }}</p>
+        <p><strong>เวลา:</strong> {{ reservation?.timeStart?.slice(0,5) ?? 'ไม่มีข้อมูล' }} - {{ reservation?.timeEnd?.slice(0,5)  ?? 'ไม่มีข้อมูล' }}</p>
       </div>
 
       <!-- ✅ ปุ่ม -->
       <div class="button-group" >
-        <p-button
-          label="ยืนยัน"
-          styleClass="confirm"
-          (click)="confirmReservation(reservation?.id)"
-          [style]="{'background-color': 'black', 'border': 'none', 'width' : '130px'}">
-        </p-button>
-        <p-button
-          label="ยกเลิกการจอง"
-          styleClass="cancel"
+        <p-button 
+          label="ยกเลิกการจอง" 
+          styleClass="cancel" 
           (click)="cancelReservation(reservation?.id)"
-          [style]="{'background-color': 'black', 'border': 'none', 'width' : '130px'}">
+          [style]="{'background-color': 'black', 'border': 'none', 'width' : '250px'}">
         </p-button>
       </div>
     </p-card>

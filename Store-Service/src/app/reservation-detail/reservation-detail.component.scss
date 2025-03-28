@@ -26,7 +26,8 @@
   }
   
   .button-group {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
+    top: 20px;
+    text-align: center;
     margin-top: 12px;
   }
