@@ -43,7 +43,7 @@ export class ReservationDetailComponent implements OnInit {
       },
       (error) => console.error('❌ Error loading reservations:', error)
     );
-  }  
+  }
 
   confirmReservation(id: number): void {
     alert(`✅ การจองโต๊ะที่ ${id} ได้รับการยืนยันแล้ว!`);

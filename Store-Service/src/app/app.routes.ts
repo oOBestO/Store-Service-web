@@ -14,6 +14,8 @@ import { ReservationDetailComponent } from './reservation-detail/reservation-det
 import { TableQrComponent } from './table-qr/table-qr.component';
 import { AllTableCustomerComponent } from './all-table-customer/all-table-customer.component';
 import { TestHomeComponent } from './testhome/testhome.component';
+import { HomeComponent } from './home/home.component';
+import { AddphonenumberComponent } from './addphonenumber/addphonenumber.component';
 
 export const routes: Routes = [
 //{ path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,7 +32,9 @@ export const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'success', component: SuccessComponent }, // ✅ ตรวจสอบว่า path: 'success' อยู่จริง
   { path: 'addmenu', component: AddmenuComponent},
-  { path: 'addorderFood', component: AddorderFoodComponent}
+  { path: 'addorderFood', component: AddorderFoodComponent},
+  { path: 'addphonenumber', component: AddphonenumberComponent}
+
 ];
 
 @NgModule({

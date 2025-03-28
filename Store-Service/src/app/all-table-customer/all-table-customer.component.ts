@@ -33,10 +33,10 @@ export class AllTableCustomerComponent {
       .subscribe(
         async (data) => {
           console.log("📌 ข้อมูลจาก API:", data);
-  
+
           if (data) {
             this.tables = data.sort((a, b) => a.index - b.index);
-  
+
             await Promise.all(
               this.tables.map(async (table) => {
                 if (table.index != null) {
@@ -44,8 +44,8 @@ export class AllTableCustomerComponent {
                 }
               })
             );
-  
-            this.groupBySeats(); 
+
+            this.groupBySeats();
           } else {
             console.warn('⚠️ No table data found');
           }
@@ -55,7 +55,7 @@ export class AllTableCustomerComponent {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load tables' });
         }
       );
-  }   
+  }
 
   async loadImage(index: string): Promise<string> {
     return `assets/images/table/table_${index}.png`;
@@ -80,6 +80,6 @@ export class AllTableCustomerComponent {
 
   // ✅ ฟังก์ชันสั่งอาหาร
   orderFood(tableId: number) {
-    this.router.navigate(['/home'], { queryParams: { tableId: tableId } });
+    this.router.navigate(['/addphonenumber'], { queryParams: { tableId: tableId } });
   }
 }

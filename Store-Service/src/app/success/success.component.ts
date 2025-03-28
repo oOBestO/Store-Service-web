@@ -9,7 +9,7 @@ import { PrimeNgModule } from '../app.module';
   selector: 'app-success',
   standalone: true,
   imports: [CommonModule,
-          PrimeNgModule,],
+          PrimeNgModule],
   templateUrl: './success.component.html',
   styleUrl: './success.component.scss',
   providers: [MessageService,PrimeIcons]

@@ -2,21 +2,21 @@
 
     <nav class="header p-4 w-full fixed top-0 left-0 z-10 flex justify-between items-center">
         <!-- 🔹 ปุ่มย้อนกลับ -->
-        <p-button 
-        icon="pi pi-angle-double-left" 
+        <p-button
+        icon="pi pi-angle-double-left"
         class="p-button-rounded p-button-text p-button-white"
         [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
         (click)="goBack()">
     </p-button>
-    
+
         <!-- 🔹 ปุ่มโลโก้ -->
         <button class="logo-button" (click)="toggleMenu()">
             <img src="https://res.cloudinary.com/dybo3empi/image/upload/v1743093978/S_1-Photoroom_t50yex.png"
                  alt="Logo"
                  class="logo">
         </button>
-    </nav>    
-    
+    </nav>
+
 
 <!-- ✅ Dropdown Menu -->
 <div *ngIf="isMenuOpen" class="dropdown-menu">
@@ -30,17 +30,16 @@
           </span>
           <i class="pi pi-chevron-right submenu-arrow"></i>
         </a>
-      
+
         <ul class="submenu" *ngIf="isSubMenuOpen">
-          <li><a href="">เพิ่มเมนู</a></li>
-          <li><a href="">แก้ไขเมนู</a></li>
+          <li><a href="/addmenu">เพิ่มเมนู</a></li>
           <li><a href="/admin/addtable">เพิ่มโต็ะ</a></li>
           <li><a href="/admin/table">แก้ไขโต็ะ</a></li>
         </ul>
-      </li>      
-  
+      </li>
+
       <!-- อื่น ๆ -->
-      <li><a href=""> <!-- ใส่ path ด้วยถ้ามี -->
+      <li><a href="/table/all"> <!-- ใส่ path ด้วยถ้ามี -->
         <i class="pi pi-list"></i>  ดูรายการอาหาร</a></li>
       <li><a href="/reservations">
         <i class="pi pi-bars"></i>  จัดการการจองโต็ะ</a></li>
@@ -48,7 +47,7 @@
         <i class="pi pi-qrcode"></i>  สร้าง QR Code</a></li>
     </ul>
   </div>
-  
+
 
 
 </nav>

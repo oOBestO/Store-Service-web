@@ -34,8 +34,8 @@ export class TableComponent {
       alert('เลขโต๊ะต้องอยู่ระหว่าง 1 ถึง 300');
       return;
     }
-    
-    
+
+
     this.guestService.saveTable(this.table).subscribe(
       (response) => {
         console.log('Response:', response);
@@ -47,5 +47,5 @@ export class TableComponent {
       }
     );
   }
-  
+
 }

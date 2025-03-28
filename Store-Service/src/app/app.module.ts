@@ -8,7 +8,6 @@ import { StepsModule } from 'primeng/steps';
 import { CalendarModule } from 'primeng/calendar';
 import { StepperModule } from 'primeng/stepper';
 import { ToastModule } from 'primeng/toast';
-import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReserveTableComponent } from './reserve-table/reserve-table.component';
