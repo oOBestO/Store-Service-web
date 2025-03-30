@@ -3,30 +3,30 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PrimeNgModule } from '../app.module';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './loginhome.component.html',
   styleUrls: ['./loginhome.component.scss'],
-  imports: [CommonModule, FormsModule], // ✅ Import FormsModule ตรงนี้ก็พอ
+  imports: [CommonModule, FormsModule, PrimeNgModule], // ✅ Import FormsModule ตรงนี้ก็พอ
 })
 export class LoginHomeComponent {
   username: string = '';
   password: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
-
+  
   login() {
     this.http.post<any>('http://localhost:8888/api/auth/login', {
       username: this.username,
       password: this.password
     }).subscribe({
       next: (response) => {
-        if (response.status === 'success') {
-          localStorage.setItem('token', response.token);
-          alert(response.message); // ✅ แสดงข้อความจาก Backend
-          this.router.navigate(['/addmenu1']);
+        if (response.token) {
+          localStorage.setItem('token', response.token); // ✅ เก็บ token
+          this.router.navigate(['/']);
         } else {
           alert(response.message); // ✅ แสดงข้อความ Error
         }

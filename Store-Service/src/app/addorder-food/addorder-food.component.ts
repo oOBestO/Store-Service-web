@@ -5,7 +5,7 @@ import { MessageService } from 'primeng/api';
 import { ActivatedRoute  } from '@angular/router';
 import { FoodService } from './Service/service';
 import { Menu, MenuItems } from './interface/guest.model';  // นำเข้า Model
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
   selector: 'app-addorder-food',
@@ -59,8 +59,11 @@ export class AddorderFoodComponent {
     if (this.menuEdit.imageUrl) {
       const formData = new FormData();
       formData.append("file", this.menuEdit.imageUrl);
-
-      this.http.post<{ imageUrl: string }>("http://localhost:8888/api/upload", formData).subscribe(response => {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      this.http.post<{ imageUrl: string }>("http://localhost:8888/api/upload", formData,{headers}).subscribe(response => {
         this.menuEdit.imageUrl = response.imageUrl; // ✅ ใช้ค่าที่ได้จาก JSON
       }, error => {
         console.error("อัปโหลดไฟล์ล้มเหลว:", error);
@@ -73,8 +76,11 @@ export class AddorderFoodComponent {
     if (this.imageFile ) {
       const formData = new FormData();
       formData.append("file", this.imageFile);
-
-      this.http.post<{ imageUrl : string }>("http://localhost:8888/api/upload", formData).subscribe(response => {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      this.http.post<{ imageUrl : string }>("http://localhost:8888/api/upload", formData ,{headers}).subscribe(response => {
         this.imageUrl = response.imageUrl; // ✅ ใช้ค่าที่ได้จาก JSON
       }, error => {
         console.error("อัปโหลดไฟล์ล้มเหลว:", error);

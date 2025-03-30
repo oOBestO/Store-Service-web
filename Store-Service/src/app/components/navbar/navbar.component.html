@@ -41,10 +41,17 @@
       <!-- อื่น ๆ -->
       <li><a href="/table/all"> <!-- ใส่ path ด้วยถ้ามี -->
         <i class="pi pi-list"></i>  ดูรายการอาหาร</a></li>
+      <li><a href="/dashboard"> <!-- ใส่ path ด้วยถ้ามี -->
+        <i class="pi pi-list"></i>  Dashboard</a></li>
+      <li><a href="/confirmpayment"> <!-- ใส่ path ด้วยถ้ามี -->
+        <i class="pi pi-list"></i>  ตรวจสอบการชำระเงิน</a></li>
       <li><a href="/reservations">
         <i class="pi pi-bars"></i>  จัดการการจองโต็ะ</a></li>
       <li><a href="/admin/qr">
         <i class="pi pi-qrcode"></i>  สร้าง QR Code</a></li>
+      <li (click)="logout()">
+          <i class="pi pi-sign-out"></i> ออกจากระบบ
+      </li>
     </ul>
   </div>
 

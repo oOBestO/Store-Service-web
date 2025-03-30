@@ -20,7 +20,7 @@ export class NavbarComponent {
   selectedFile: File | null = null;
 
   constructor(private router: Router) {}
-  
+
     ngOnInit() {
       this.items = [
         {
@@ -29,11 +29,11 @@ export class NavbarComponent {
         },
       ];
     }
-  
+
     goBack() {
       this.router.navigate(['/previous-page']);
     }
-  
+
     onFileSelected(event: Event) {
       const input = event.target as HTMLInputElement;
       if (input.files && input.files.length > 0) {
@@ -41,7 +41,17 @@ export class NavbarComponent {
         console.log('Selected file:', this.selectedFile.name);
       }
     }
-  
+
+    logout() {
+      localStorage.removeItem('token');         // ✅ ลบ token
+      localStorage.removeItem('customerInfo');  // ✅ ลบข้อมูลอื่นๆ ถ้ามี
+      localStorage.removeItem('orderData');
+      localStorage.removeItem('tableId');
+
+      // 🧭 พาไปหน้า login หรือหน้าหลัก
+      this.router.navigate(['/login']);
+    }
+    
     handleSubmit() {
       console.log('Title:', this.imageTitle);
       console.log('Description:', this.imageDescription);
@@ -52,7 +62,7 @@ export class NavbarComponent {
     // ✅ ฟังก์ชันที่ทำงานเมื่อคลิกโลโก้
       isMenuOpen = false; // ✅ สร้างตัวแปรเก็บสถานะของเมนู
       isSubMenuOpen = false;
-      
+
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen
     }

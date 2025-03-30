@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient,withInterceptorsFromDi } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 //import { HomeComponent } from './app/home/home.component';
 import { TableComponent } from './app/table/table.component';
@@ -10,10 +10,15 @@ import { BillComponent } from './app/bill/bill.component';
 import { PaymentComponent } from './app/payment/payment.component';
 import { SuccessComponent } from './app/success/success.component';
 import { routes } from './app/app.routes';
+import { AuthInterceptor } from './app/auth.interceptor';
+import { importProvidersFrom, inject } from '@angular/core';
+import { PrimeNgModule } from './app/app.module';
+
 
 bootstrapApplication(AppComponent, {
   providers: [provideAnimationsAsync(),
     provideRouter(routes),
-    provideHttpClient()
-  ] 
+    provideHttpClient(withInterceptorsFromDi()),
+    importProvidersFrom(PrimeNgModule),
+  ]
 });

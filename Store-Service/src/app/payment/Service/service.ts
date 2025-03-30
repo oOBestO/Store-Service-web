@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
 import { Menu } from "../../addmenu/interface/guest.model";
@@ -8,23 +8,26 @@ import { SelectedMenu } from "../interface/guest.model";
   providedIn: 'root'
 })
 export class GuestService {
-  private apiUrl = 'http://localhost:8888/api/payment';
+  private apiUrl = 'http://localhost:8888/api/orders';
 
   constructor(private http: HttpClient) {}
 
-   // ✅ ยืนยันการชำระเงิน (เริ่มต้น `pending`)
-   confirmPayment(orderId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/confirm/${orderId}`, {});
+  saveOrder(payload: any): Observable<any> {
+    return this.http.post('http://localhost:8888/api/orders/save', payload ,{
+      responseType: 'json'
+    });
   }
 
-  // ✅ เช็คสถานะการชำระเงิน
-  checkPaymentStatus(orderId: number): Observable<{ status: string }> {
-    return this.http.get<{ status: string }>(`${this.apiUrl}/status/${orderId}`);
-  }
-
-  // ✅ อัปเดตสถานะการชำระเงิน
-  updatePaymentStatus(orderId: number, status: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/update/${orderId}?status=${status}`, {});
+  checkPaymentStatus(orderId: number) {
+    const token = localStorage.getItem('token');
+    return this.http.get<any>(
+      `http://localhost:8888/api/orders/${orderId}/status`,
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`
+        })
+      }
+    );
   }
 
 }

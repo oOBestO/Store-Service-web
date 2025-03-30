@@ -12,5 +12,41 @@
     />
   </div>
 </div>
-<p>success works!</p>
-<p-button label="Search" icon="pi-chevron-left" (onClick)="butTonleft()" />
+<div class="payment-success-wrapper">
+  <h2>ชำระเงินเสร็จสิ้น</h2>
+  <div #receiptImage class="receipt-card">
+    <h3>รายการอาหาร</h3>
+
+    <div class="customer-info">
+      <p><strong>ชื่อลูกค้า:</strong> {{ order.customerName }}</p>
+      <p><strong>เบอร์โทร:</strong> {{ order.customerPhone }}</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>เมนู</th>
+          <th>จำนวน</th>
+          <th>ราคา</th>
+          <th>รวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of order.items">
+          <td>{{ item.menuName }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | number:'1.2-2' }}</td>
+          <td>{{ item.quantity * item.price | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="total">รวมทั้งหมด: {{ order.totalAmount | number:'1.2-2' }} ฿</p>
+    <p class="table-number">โต๊ะ: {{ order.tableNumber }}</p>
+  </div>
+
+  <div class="button-group">
+    <button (click)="downloadReceipt()">บันทึกรูปภาพรายการอาหาร</button>
+    <button (click)="goHome()">กลับหน้าแรก</button>
+  </div>
+</div>

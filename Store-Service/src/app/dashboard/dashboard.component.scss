@@ -1,0 +1,29 @@
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  min-height: 100vh;
+  background-color: #e77c30;
+
+  .chart-card {
+    width: 100%;
+    max-width: 650px; // 👈 ขยายกรอบการ์ด
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background: white;
+    text-align: center;
+
+    .chart-subtitle {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart {
+      height: 38rem !important; // 👈 ขยายความสูง
+      width: 100% !important;
+    }
+  }
+}

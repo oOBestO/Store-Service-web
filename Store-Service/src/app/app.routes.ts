@@ -16,25 +16,32 @@ import { AllTableCustomerComponent } from './all-table-customer/all-table-custom
 import { TestHomeComponent } from './testhome/testhome.component';
 import { HomeComponent } from './home/home.component';
 import { AddphonenumberComponent } from './addphonenumber/addphonenumber.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { LoginHomeComponent } from './loginhome/loginhome.component';
+import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
 //{ path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'admin/addtable', component: TableComponent, pathMatch: 'full' },
-  { path: 'admin/table', component: AllTableComponent, pathMatch: 'full' },
-  { path: 'reserve', component: ReserveTableComponent, pathMatch: 'full' },
-  { path: 'reservations', component: ReservationDetailComponent },
-  { path: 'table/all', component: AllTableCustomerComponent },
-  { path: 'home', component: TestHomeComponent },
-  { path: 'admin/qr', component: TableQrComponent },
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'bill', component: BillComponent },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'order', component: OrderComponent },
-  { path: 'success', component: SuccessComponent }, // ✅ ตรวจสอบว่า path: 'success' อยู่จริง
-  { path: 'addmenu', component: AddmenuComponent},
-  { path: 'addorderFood', component: AddorderFoodComponent},
-  { path: 'addphonenumber', component: AddphonenumberComponent}
-
+  { path: 'admin/addtable', component: TableComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
+  { path: 'admin/table', component: AllTableComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
+  { path: 'reserve', component: ReserveTableComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
+  { path: 'reservations', component: ReservationDetailComponent , canActivate: [AuthGuard] },
+  { path: 'table/all', component: AllTableCustomerComponent , canActivate: [AuthGuard] },
+  { path: 'admin/qr', component: TableQrComponent , canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
+  { path: 'bill', component: BillComponent , canActivate: [AuthGuard] },
+  { path: 'payment', component: PaymentComponent , canActivate: [AuthGuard] },
+  { path: 'order', component: OrderComponent , canActivate: [AuthGuard] },
+  { path: 'success', component: SuccessComponent , canActivate: [AuthGuard] }, // ✅ ตรวจสอบว่า path: 'success' อยู่จริง
+  { path: 'addmenu', component: AddmenuComponent, canActivate: [AuthGuard] },
+  { path: 'addorderFood', component: AddorderFoodComponent, canActivate: [AuthGuard] },
+  { path: 'addphonenumber', component: AddphonenumberComponent, canActivate: [AuthGuard] },
+  { path: 'confirmpayment', component: ConfirmPaymentComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginHomeComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

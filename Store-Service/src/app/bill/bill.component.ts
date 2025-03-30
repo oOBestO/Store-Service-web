@@ -23,7 +23,7 @@ export class BillComponent {
       fontList: FontMenu[] = [];
       drinkList: FontMenu[] = [];
       totalCost: number = 0;
-      tableNumber: number = 1; // สมมุติว่าเป็นโต๊ะที่ 1
+      tableNumber: string = ''; // สมมุติว่าเป็นโต๊ะที่ 1
 
       onActiveIndexChange(event: number) {
         this.activeIndex = event;
@@ -33,6 +33,10 @@ export class BillComponent {
         } // Inject Service
 
       ngOnInit(): void {
+        const tableId = localStorage.getItem('tableId');
+        if(tableId){
+          this.tableNumber = tableId;
+        }
         this.items = [
           {
             label: 'รายการอาหาร',

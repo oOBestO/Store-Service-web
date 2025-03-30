@@ -12,7 +12,7 @@ import { GuestService } from './Service/service';
   imports: [
     CommonModule,
     FormsModule, // ✅ FormsModule เพื่อให้ ngModel ใช้งานได้
-    PrimeNgModule,
+    PrimeNgModule
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'

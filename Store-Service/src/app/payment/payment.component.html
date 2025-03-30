@@ -1,43 +1,50 @@
-<div class="background">
-  <div class="card">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <p-toast />
-    <p-steps
+<div class="payment-page">
+  <p-toast></p-toast>
+
+  <p-steps
     [model]="items"
     [readonly]="true"
     [activeIndex]="activeIndex"
-    (activeIndexChange)="onActiveIndexChange($event)"
-    content=""
-    [ngClass]="customClass"
-    />
-  </div>
-</div>
-<div class="payment-container">
-  <h2 class="title">เลือกวิธีการชำระเงิน</h2>
+    class="steps-custom"
+  ></p-steps>
 
   <div class="payment-card">
-    <h3>โต๊ะ {{ tableNumber }}</h3>
+    <h2>โต๊ะ {{ tableNumber }}</h2>
+    <h3>ยอดชำระ: <span class="cost">{{ totalCost }} ฿</span></h3>
 
-    <!-- เลือกวิธีการชำระเงิน -->
     <div class="payment-methods">
-      <label>
-        <input type="radio" name="payment" [(ngModel)]="selectedPayment" value="cash">
+      <label class="radio-option">
+        <input type="radio" name="payment" [(ngModel)]="selectedPayment" value="cash" />
         ชำระเงินสด
       </label>
 
-      <label>
-        <input type="radio" name="payment" [(ngModel)]="selectedPayment" value="qr">
-        ชำระ QR Code
+      <label class="radio-option">
+        <input type="radio" name="payment" [(ngModel)]="selectedPayment" value="qr" />
+        ชำระผ่าน QR Code
       </label>
     </div>
 
-    <!-- แสดง QR Code เมื่อเลือก "ชำระ QR Code" -->
+    <!-- ✅ แสดง QR เมื่อเลือก -->
     <div *ngIf="selectedPayment === 'qr'" class="qr-section">
-      <h3>Cost: <span class="cost">{{ totalCost }} ฿</span></h3>
-      <img src="{{ qrCodeUrl }}" alt="QR Code" class="qr-code">
+      <img [src]="qrCodeUrl" alt="QR Code" class="qr-code" />
+      <p class="qr-note">กรุณาสแกนเพื่อชำระเงิน</p>
     </div>
 
-    <!-- ปุ่มยืนยัน -->
-    <button class="btn confirm-btn" (click)="confirmPayment()">ยืนยันชำระเงิน</button>
+    <!-- ✅ ปุ่มยืนยันถูก disable ขณะกำลังยืนยัน -->
+    <button
+      class="btn-confirm"
+      [disabled]="isConfirming || !selectedPayment"
+      (click)="confirmPayment()"
+    >
+      {{ isConfirming ? 'กำลังตรวจสอบ...' : 'ยืนยันชำระเงิน' }}
+    </button>
+  </div>
+
+  <!-- ✅ Modal รอการชำระเงิน -->
+  <div *ngIf="showWaitingModal" class="modal-overlay">
+    <div class="modal-content">
+      <p>กรุณารอพนักงานยืนยันการชำระเงิน...</p>
+      <p><i class="pi pi-spinner pi-spin" style="font-size: 2em;"></i></p>
+    </div>
   </div>
 </div>
