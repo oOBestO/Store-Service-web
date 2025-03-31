@@ -106,3 +106,57 @@
     }
   }
 }
+
+
+::ng-deep .custom-steps .p-steps {
+  margin-top: 1.5rem; // ✅ เพิ่มระยะห่างจากด้านบน
+}
+
+@media (max-width: 768px) {
+  ::ng-deep .p-steps {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    padding: 0 0.5rem !important;
+  }
+
+  ::ng-deep .p-steps .p-steps-item {
+    flex: 1 1 25% !important;
+    max-width: 100px !important;
+    text-align: center !important;
+  }
+
+  ::ng-deep .p-steps .p-menuitem-text {
+    white-space: normal !important;
+    font-size: 0.65rem !important;
+    line-height: 1.1rem !important;
+    max-width: 70px !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* บนมือถือ */
+/* ✅ เฉพาะ mobile เท่านั้น */
+::ng-deep .mobile-steps .p-steps {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem; // ✅ เพิ่มช่องไฟระหว่าง step
+}
+
+::ng-deep .mobile-steps .p-steps-item {
+  max-width: 85px;          // ✅ จำกัดความกว้างของ step
+  text-align: center;
+  padding: 0 0.25rem;       // ✅ เพิ่ม padding ด้านข้างเล็กน้อย
+}
+
+::ng-deep .mobile-steps .p-menuitem-text {
+  font-size: 0.65rem;
+  white-space: normal;
+  line-height: 1.1rem;
+  max-width: 75px;          // ✅ จำกัดให้ข้อความตัดบรรทัดได้ดีขึ้น
+  word-break: break-word;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 0.3rem;
+}

@@ -3,13 +3,20 @@ import { GuestService } from './Service/service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../app.module';
+import { Router} from '@angular/router';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 @Component({
   selector: 'app-reservation-detail',
   standalone: true,
-  imports: [CommonModule, PrimeNgModule],
+  imports: [CommonModule, PrimeNgModule, ToastModule, ConfirmDialogModule],
   templateUrl: './reservation-detail.component.html',
-  styleUrls: ['./reservation-detail.component.scss']
+  styleUrls: ['./reservation-detail.component.scss'],
+  providers: [MessageService, ConfirmationService]
+  
 })
 export class ReservationDetailComponent implements OnInit {
 
@@ -17,7 +24,10 @@ export class ReservationDetailComponent implements OnInit {
 
   constructor(
     private guestService: GuestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -47,14 +57,35 @@ export class ReservationDetailComponent implements OnInit {
   }
 
   cancelReservation(id: number): void {
-    if (confirm('คุณต้องการยกเลิกการจองนี้ใช่ไหม?')) {
-      this.guestService.deleteReservation(id).subscribe(
-        () => {
-          alert(`❌ ยกเลิกการจองโต๊ะสำเร็จ!`);
-          this.loadReservations(); // ✅ โหลดข้อมูลใหม่หลังจากยกเลิก
-        },
-        (error) => console.error('❌ Error deleting reservation:', error)
-      );
-    }
+    this.confirmationService.confirm({
+      message: 'คุณต้องการยกเลิกการจองนี้ใช่ไหม?',
+      header: 'ยืนยันการยกเลิก',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'ตกลง',
+      rejectLabel: 'ยกเลิก',
+      accept: () => {
+        this.guestService.deleteReservation(id).subscribe(
+          () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'ยกเลิกสำเร็จ',
+              detail: 'การจองถูกยกเลิกเรียบร้อยแล้ว'
+            });
+            this.loadReservations(); // โหลดข้อมูลใหม่
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'เกิดข้อผิดพลาด',
+              detail: 'ไม่สามารถยกเลิกการจองได้'
+            });
+            console.error('❌ Error deleting reservation:', error);
+          }
+        );
+      }
+    });
+  }
+  goBack() {
+    this.router.navigate(['/home']);
   }
 }

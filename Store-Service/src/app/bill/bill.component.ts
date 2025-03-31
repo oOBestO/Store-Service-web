@@ -32,7 +32,15 @@ export class BillComponent {
         constructor(private router: Router,public messageService: MessageService,public dataService :DataService) {
         } // Inject Service
 
+        isMobile: boolean = false;
+
+        checkMobile = (): void => {
+          this.isMobile = window.innerWidth < 768;
+        };
+
       ngOnInit(): void {
+        this.checkMobile(); // ✅ เรียกครั้งแรก
+        window.addEventListener('resize', this.checkMobile);
         const tableId = localStorage.getItem('tableId');
         if(tableId){
           this.tableNumber = tableId;
@@ -69,6 +77,8 @@ export class BillComponent {
         console.log("✅ หน้า bill กู้คืนข้อมูลจาก localStorage:", this.fontList);
       }
 
+      
+
     // คำนวณราคารวม
     this.totalCost = [...this.fontList].reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
@@ -76,5 +86,11 @@ export class BillComponent {
       butTonnext(){
         console.log('totalCost',this.totalCost)
         this.router.navigate(['/payment'] , { queryParams: {totalCost: this.totalCost }})
+      }
+      ngOnDestroy(): void {
+        window.removeEventListener('resize', this.checkMobile);
+      }
+      goBack() {
+        this.router.navigate(['/order']);
       }
 }

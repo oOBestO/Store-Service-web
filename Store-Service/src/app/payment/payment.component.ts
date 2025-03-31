@@ -36,7 +36,16 @@ export class PaymentComponent {
     private paymentService: GuestService
   ) {}
 
+  isMobile: boolean = false;
+
+  checkMobile = (): void => {
+    this.isMobile = window.innerWidth < 768;
+  };
+
   ngOnInit(): void {
+    this.checkMobile(); // ✅ เรียกครั้งแรก
+    window.addEventListener('resize', this.checkMobile);
+
     this.ActivatedRoute.queryParams.subscribe(param => {
       if (param['totalCost']) {
         this.totalCost = param['totalCost'];
@@ -117,9 +126,19 @@ export class PaymentComponent {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.pollingSubscription) {
       this.pollingSubscription.unsubscribe();
     }
+  
+    window.removeEventListener('resize', this.checkMobile);
+  }
+  
+  onActiveIndexChange(event: number) {
+    this.activeIndex = event;
+  }
+
+  goBack() {
+    this.router.navigate(['/bill']);
   }
 }

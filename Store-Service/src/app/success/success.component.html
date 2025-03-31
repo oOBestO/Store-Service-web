@@ -8,7 +8,10 @@
     [activeIndex]="activeIndex"
     (activeIndexChange)="onActiveIndexChange($event)"
     content=""
-    [ngClass]="customClass"
+    [ngClass]="{
+      'custom-steps': true,
+      'mobile-steps': isMobile
+    }"
     />
   </div>
 </div>

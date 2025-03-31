@@ -6,6 +6,7 @@ import { ActivatedRoute  } from '@angular/router';
 import { FoodService } from './Service/service';
 import { Menu, MenuItems } from './interface/guest.model';  // นำเข้า Model
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addorder-food',
@@ -39,7 +40,7 @@ export class AddorderFoodComponent {
   id : number = 0;
 
 
-  constructor(public messageService: MessageService,private router: ActivatedRoute ,private foodService:FoodService,private http :HttpClient) {}
+  constructor(public messageService: MessageService,private activatedRoute: ActivatedRoute ,private foodService:FoodService,private router: Router, private http :HttpClient) {}
 
   ngOnInit() {
 
@@ -47,7 +48,7 @@ export class AddorderFoodComponent {
     this.editPage()
   }
 
-  nameMenu(){this.router.queryParams.subscribe(param => {
+  nameMenu(){this.activatedRoute.queryParams.subscribe(param => {
     if (param['menuItems']) {
       this.menuItems = param['menuItems'];
       console.log('succes',this.menuItems)
@@ -89,7 +90,7 @@ export class AddorderFoodComponent {
   }
 
   editPage(){
-    this.router.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.id = params['menuId'];
       if (this.id && this.id !=0 ) {
         this.foodService.getMenuById(this.id).subscribe(menu => {
@@ -101,7 +102,7 @@ export class AddorderFoodComponent {
  }
 
   saveMenu() {
-    this.router.queryParams.subscribe(param => {
+    this.activatedRoute.queryParams.subscribe(param => {
       if (param['menuItems']) {
         this.menu= param['menuItems'];
         console.log('succes',this.menuItems)
@@ -110,13 +111,21 @@ export class AddorderFoodComponent {
     if (!this.menuName || !this.menuPrice || !this.menuItems || !this.imageUrl) {
       if(this.id){
         this.foodService.saveOrUpdateMenu(this.menuEdit).subscribe(
-          response => {
-            console.log("บันทึกสำเร็จ:", response);
+          (response: any) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'แก้ไขเมนูสำเร็จ',
+              detail: response.message || 'ข้อมูลเมนูได้รับการอัปเดตแล้ว!'
+            });
           },
           error => {
-            console.error("เกิดข้อผิดพลาด:", error);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'เกิดข้อผิดพลาด',
+              detail: 'ไม่สามารถอัปเดตเมนูได้ กรุณาลองใหม่'
+            });
           }
-        );
+        );      
       } else {
         alert('กรุณากรอกข้อมูลให้ครบ!');
       }
@@ -130,11 +139,21 @@ export class AddorderFoodComponent {
           this.foodService.saveOrUpdateMenu(menuData).subscribe(
             response => {
               console.log("บันทึกสำเร็จ:", response);
+          
+              // ✅ แสดง Toast ตรงนี้ทีเดียว
+              this.messageService.add({
+                severity: 'success',
+                summary: 'เพิ่มเมนูสำเร็จ',
+                detail: 'เมนูถูกบันทึกเรียบร้อย!',
+              });
+          
+              // ✅ ล้างฟอร์ม
+              this.clear();
             },
             error => {
               console.error("เกิดข้อผิดพลาด:", error);
-              }
-            );
+            }
+          );
 
       }
   }
@@ -145,10 +164,14 @@ export class AddorderFoodComponent {
   }
 
   clear() {
-    alert('เมนูถูกบันทึกเรียบร้อย!');
     this.menuName = '';
     this.menuPrice = 0;
     this.selectedImage = null;
     this.imageUrl = '';
+  }
+
+  
+  goBack() {
+    this.router.navigate(['/home']);
   }
 }

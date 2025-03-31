@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 3rem 1rem;
+  padding: 5rem 1rem 3rem 1rem;
   min-height: 100vh;
   background-color: #e77c30;
 
@@ -13,6 +13,7 @@
     border-radius: 1rem;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     background: white;
+    margin-top: 4rem;
     text-align: center;
 
     .chart-subtitle {
@@ -26,4 +27,24 @@
       width: 100% !important;
     }
   }
+}
+.back-button-wrapper {
+  position: fixed;     // ✅ ตรึงไว้กับหน้าจอ
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;       // ✅ อยู่เหนือทุก element อื่น
+}
+
+.back-btn {
+  background-color: black !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.1rem 0.1rem !important; // 🔽 ลด padding
+  width: 1.8rem;                     // 🔽 ลดขนาดความกว้าง
+  height: 1.5rem;                    // 🔽 ลดความสูง
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;                // 🔽 ปรับขนาดไอคอนให้พอดี
+  line-height: 1;
 }

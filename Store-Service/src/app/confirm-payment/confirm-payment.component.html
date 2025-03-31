@@ -1,3 +1,13 @@
+<p-toast position="top-center"></p-toast>
+<div class="back-button-wrapper">
+  <p-button
+    icon="pi pi-angle-double-left"
+    class="p-1 w-7 h-7 text-sm back-btn"
+    [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
+    (click)="goBack()">
+  </p-button>
+</div>
+<div class="page-wrapper">
 <div class="order-info-wrapper" *ngFor="let orderDetails of orderList">
   <div class="order-info-card">
     <h3>โต๊ะ: {{ orderDetails.tableNumber }}</h3>
@@ -26,12 +36,18 @@
       รวมทั้งหมด: {{ orderDetails.totalAmount | number:'1.2-2' }} ฿
     </div>
 
-    <div class="actions">
-      <button (click)="confirmPayment(orderDetails.id)">ยืนยันการชำระเงิน</button>
+    <div class="actions btn-wrapper">
+      <p-button 
+        label="ยืนยันการชำระเงิน" 
+        icon="pi pi-check-circle" 
+        class="p-button-success small-btn" 
+        (onClick)="confirmPayment(orderDetails.id)">
+      </p-button>
     </div>
   </div>
 </div>
 
 <div class="no-order" *ngIf="orderList.length === 0 && !isLoading">
   <p>🚫 ไม่มีคำสั่งซื้อที่รอการชำระเงิน</p>
+</div>
 </div>

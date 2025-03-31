@@ -3,20 +3,24 @@ import { GuestService } from './Service/service';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../app.module';
 import { MessageService } from 'primeng/api';
+import { Router} from '@angular/router';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-all-table',
   standalone: true,
-  imports: [CommonModule, PrimeNgModule],
+  imports: [CommonModule, PrimeNgModule, ToastModule, ConfirmDialogModule],
   templateUrl: './all-table.component.html',
   styleUrl: './all-table.component.scss',
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
 })
 export class AllTableComponent {
   tables: any[] = [];
   seatGroups: { seats: number; tables: any[] }[] = [];
 
-  constructor(private guestService: GuestService, private messageService: MessageService) {}
+  constructor(private guestService: GuestService, private messageService: MessageService, private router: Router, private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
     this.loadTables();
@@ -73,20 +77,38 @@ export class AllTableComponent {
       tables: tables.sort((a, b) => a.index - b.index),
     }));
   }
+  
 
   // ✅ ลบโต๊ะตาม id
   deleteTable(id: number) {
-    if (confirm('คุณต้องการลบโต๊ะนี้หรือไม่?')) {
-      this.guestService.deleteTable(id).subscribe(
-        () => {
-          this.messageService.add({ severity: 'success', summary: 'สำเร็จ', detail: 'ลบโต๊ะสำเร็จ' });
-          this.loadTables(); // โหลดใหม่
-        },
-        (error) => {
-          console.error('❌ เกิดข้อผิดพลาดในการลบโต๊ะ:', error);
-          this.messageService.add({ severity: 'error', summary: 'ผิดพลาด', detail: 'ไม่สามารถลบโต๊ะได้' });
-        }
-      );
-    }
+    this.confirmationService.confirm({
+      message: 'คุณต้องการลบโต๊ะนี้หรือไม่?',
+      header: 'ยืนยันการลบ',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'ตกลง',
+      rejectLabel: 'ยกเลิก',
+      accept: () => {
+        this.guestService.deleteTable(id).subscribe(
+          () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'สำเร็จ',
+              detail: 'ลบโต๊ะสำเร็จ'
+            });
+            this.loadTables();
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'ผิดพลาด',
+              detail: 'ไม่สามารถลบโต๊ะได้'
+            });
+          }
+        );
+      }
+    });
+  }
+  goBack() {
+    this.router.navigate(['/order']);
   }
 }

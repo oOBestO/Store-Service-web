@@ -34,8 +34,17 @@ export class SuccessComponent {
     constructor(private router: Router,public messageService: MessageService) {
     } // Inject Service
 
+    isMobile: boolean = false;
+
+    checkMobile = (): void => {
+    this.isMobile = window.innerWidth < 768;
+    };
+
+
 
     ngOnInit(): void {
+    this.checkMobile(); // ✅ เรียกครั้งแรก
+    window.addEventListener('resize', this.checkMobile);
     const customerInfo = localStorage.getItem('customerInfo');
     const orderData = localStorage.getItem('orderData');
     const tableId = localStorage.getItem('tableId');
@@ -92,4 +101,5 @@ export class SuccessComponent {
     goHome() {
       this.router.navigate(['/home']); // เปลี่ยนตาม route ของคุณ
     }
+
 }
