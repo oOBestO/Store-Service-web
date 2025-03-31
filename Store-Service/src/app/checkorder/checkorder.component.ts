@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrderService } from './Service/service';
 import { OrderDTO } from './models/order.model';
+import { Router} from '@angular/router';
+import { PrimeNgModule } from '../app.module';
 
 @Component({
   selector: 'app-checkorder',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,PrimeNgModule],
   templateUrl: './checkorder.component.html',
   styleUrls: ['./checkorder.component.scss']
 })
@@ -22,7 +24,7 @@ export class CheckOrderComponent implements OnInit {
     { id: 33, index: 5, seats: 10 }
   ];
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService,private router: Router) {}
 
   ngOnInit(): void {
     this.orderService.getPaidOrders().subscribe({
@@ -59,6 +61,9 @@ export class CheckOrderComponent implements OnInit {
       const order = this.orders.find(o => o.id === orderId);
       if (order) order.delivered = false;
     });
+  }
+  goBack() {
+    this.router.navigate(['/order']);
   }
   
 }
