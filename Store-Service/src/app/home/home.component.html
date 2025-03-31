@@ -1,41 +1,50 @@
+<div class="container">
+  <h1 class="main-title">Restaurant</h1>
+  <h2 class="subtitle">ข้าวสวย</h2>
 
-<div class="background">
-  <div class="card">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <p-toast />
-    <p-steps
-    [model]="items"
-    [readonly]="false"
-    [activeIndex]="activeIndex"
-    (activeIndexChange)="onActiveIndexChange($event)"
-    content=""
-    [ngClass]="customClass"
-    /> -->
-    <p-card header="Restaurant ข้าวสวย">
-    <div class="restaurant-container">
-      <div class="menu-section">
-        <h2>เมนูแนะนำ</h2>
-        <div class="menu-grid">
-          <p-card *ngFor="let item of getRecommendedItems()" [header]="item.name">
-            <img [src]="item.imageUrl" alt="{{ item.name }}" class="menu-image"/>
-            <p>{{ item.price }} ฿</p>
-            <p-checkbox></p-checkbox>
-          </p-card>
+  <!-- ✅ เมนูแนะนำ -->
+  <div class="recommended-section">
+    <h3 class="category-title" style="color: black;">เมนูเลือกให้</h3>
+    <div class="menu-list">
+      <div *ngFor="let menu of randomMenus"
+          class="menu-card"
+          [class.selected]="selectedMenus.includes(menu.id)"
+          (click)="toggleSelection(menu)">
+
+        <div class="overlay" *ngIf="selectedMenus.includes(menu.id)">
+          <span>เลือกแล้ว</span>
+        </div>
+
+        <img [src]="menu.imageUrl" class="menu-image">
+        <div class="menu-info">
+          <h4>{{ menu.menuName }}</h4>
+          <p>ราคา {{ menu.price }} ฿</p>
         </div>
       </div>
-      <div class="menu-section" *ngFor="let category of categories">
-        <h2>{{ category }}</h2>
-        <div class="menu-grid">
-          <p-card *ngFor="let item of getItemsByCategory(category)" [header]="item.name">
-            <img [src]="item.imageUrl" alt="{{ item.name }}" class="menu-image"/>
-            <p>{{ item.price }} ฿</p>
-            <p-checkbox></p-checkbox>
-          </p-card>
-        </div>
-      </div>
-      <p-button label="Search" icon="pi pi-check" (onClick)="linkpage()" />
     </div>
-  </p-card>
   </div>
+
+  <!-- ✅ หมวดหมู่เมนู -->
+  <div *ngFor="let category of categoryKeys">
+    <h3 class="category-title">{{ category }}</h3>
+    <div class="menu-list">
+      <div *ngFor="let menu of groupedMenus[category]"
+          class="menu-card"
+          [class.selected]="selectedMenus.includes(menu.id)"
+          (click)="toggleSelection(menu)">
+
+        <div class="overlay" *ngIf="selectedMenus.includes(menu.id)">
+          <span>เลือกแล้ว</span>
+        </div>
+
+        <img [src]="menu.imageUrl" class="menu-image">
+        <div class="menu-info">
+          <h4>{{ menu.menuName }}</h4>
+          <p>ราคา {{ menu.price }} ฿</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="confirmSelection()" class="btn confirm-btn">ยืนยัน</button>
 </div>
-<qrcode [qrdata]="qrData" [errorCorrectionLevel]="'M'"></qrcode>

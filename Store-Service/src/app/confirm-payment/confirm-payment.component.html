@@ -1,0 +1,37 @@
+<div class="order-info-wrapper" *ngFor="let orderDetails of orderList">
+  <div class="order-info-card">
+    <h3>โต๊ะ: {{ orderDetails.tableNumber }}</h3>
+    <h4>ลูกค้า: {{ orderDetails.customerName }}</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>เมนู</th>
+          <th>จำนวน</th>
+          <th>ราคา</th>
+          <th>รวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of orderDetails.items">
+          <td>{{ item.menuName }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | number:'1.2-2' }}</td>
+          <td>{{ item.quantity * item.price | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="order-summary">
+      รวมทั้งหมด: {{ orderDetails.totalAmount | number:'1.2-2' }} ฿
+    </div>
+
+    <div class="actions">
+      <button (click)="confirmPayment(orderDetails.id)">ยืนยันการชำระเงิน</button>
+    </div>
+  </div>
+</div>
+
+<div class="no-order" *ngIf="orderList.length === 0 && !isLoading">
+  <p>🚫 ไม่มีคำสั่งซื้อที่รอการชำระเงิน</p>
+</div>

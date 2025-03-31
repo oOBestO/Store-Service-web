@@ -1,0 +1,29 @@
+<!-- ✅ เนื้อหา -->
+<div class="content">
+    <h1 class="title">Restaurant Custom</h1>
+    <p class="subtitle">ข้าวสวย</p>
+
+    <!-- Image Upload -->
+    <div class="upload-box">
+        <label for="fileInput" class="upload-label">
+            <div class="upload-icon">
+                <i class="pi pi-image"></i>
+            </div>
+        </label>
+        <input id="fileInput" type="file" class="hidden" (change)="onFileSelected($event)">
+    </div>
+
+    <!-- Form -->
+    <div class="form">
+        <label class="form-label">คำในรูปภาพ</label>
+        <input type="text" class="form-input" [(ngModel)]="imageTitle">
+
+        <label class="form-label">คำอธิบายเพิ่มเติม</label>
+        <input type="text" class="form-input" [(ngModel)]="imageDescription">
+    </div>
+
+    <!-- Submit Button -->
+    <button class="submit-button" (click)="handleSubmit()">
+        ยืนยัน
+    </button>
+</div>

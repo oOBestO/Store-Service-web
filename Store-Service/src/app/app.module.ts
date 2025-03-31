@@ -9,13 +9,29 @@ import { CalendarModule } from 'primeng/calendar';
 import { StepperModule } from 'primeng/stepper';
 import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReserveTableComponent } from './reserve-table/reserve-table.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { AuthInterceptor } from './auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './auth.guard'; // ✅ แก้ path ให้ถูก
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
-  declarations: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+    },
+    AuthGuard
+  ],
+  declarations: [
+    ReserveTableComponent,
+  ],
   imports: [
+    ChartModule,
     CommonModule,
     ButtonModule,
     CalendarModule,
@@ -25,9 +41,11 @@ import { QRCodeModule } from 'angularx-qrcode';
     CardModule,
     CheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
     QRCodeModule
   ],
   exports: [
+    ChartModule,
     ButtonModule,
     CalendarModule,
     StepperModule,
@@ -36,6 +54,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     CardModule,
     CheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
     QRCodeModule
   ]
 })

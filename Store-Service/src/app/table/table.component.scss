@@ -1,0 +1,88 @@
+/* สำหรับทุกอุปกรณ์ */
+
+.icon-left {
+    color: white;
+    font-size: 24px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.column {
+    position: relative;
+    top: 30px;
+}
+
+.Card {
+    position: relative;
+    top: 50px;
+}
+
+.C1 {
+    color: black;
+}
+
+/* สำหรับ input ภายใน Card */
+.Card input {
+    padding: 0.3rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 15px;
+    background-color: #FFB07B;
+    border: none;
+    width: 300px;
+    text-align: left;
+}
+
+.button-container {
+    position: relative;
+    top: 20px;
+    text-align: center;
+}
+
+    /* ปรับตำแหน่งของ column */
+    .column {
+        top: 40px; /* เพิ่มพื้นที่ให้ header */
+    }
+
+    .Card {
+        top: 60px; /* เพิ่มพื้นที่ให้ header */
+    }
+
+    /* ปรับขนาด input */
+    .Card input {
+        width: 100%; /* ให้ input ยืดเต็มความกว้างของหน้าจอ */
+        font-size: 14px;
+        padding: 0.3rem 0.8rem;
+    }
+
+    /* ปรับปุ่มให้เต็มหน้าจอ */
+    .button-container {
+        width: 100%;
+    }
+
+    .button-container button {
+        width: 100%; /* ปรับให้ปุ่มยืดเต็มหน้าจอ */
+    }
+
+
+/* สำหรับหน้าจอคอมพิวเตอร์ หรือหน้าจอที่กว้างกว่า 600px */
+@media (min-width: 601px) {
+    /* ปรับขนาด input และปุ่ม */
+    .Card {
+        display: flex;
+        flex-direction: column; /* ให้เนื้อหาจัดเรียงลงล่าง */
+        align-items: center;
+        width: 100%;
+    }
+
+    .Card input {
+        width: 300px;
+    }
+
+    .button-container button {
+        width: 250px;
+    }
+
+    .button-container {
+        padding: 20px 0;
+    }
+}

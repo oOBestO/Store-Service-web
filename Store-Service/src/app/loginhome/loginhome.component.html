@@ -1,0 +1,19 @@
+<div class="flex1 flex-col items-center justify-center min-h-screen bg-orange-500">
+  <!-- Header -->
+  <header class="header bg-black p-4 w-full fixed top-0 left-0 z-10"></header>
+
+  <div class="login-page">
+    <img class="logo" src="assets/images/S_1-Photoroom.png" alt="Logo" />
+    <h1>เข้าสู่ระบบ</h1>
+
+    <div class="form">
+      <label for="username">Username</label>
+      <input id="username" [(ngModel)]="username" type="text" placeholder="ชื่อผู้ใช้" />
+
+      <label for="password">Password</label>
+      <input id="password" [(ngModel)]="password" type="password" placeholder="รหัสผ่าน" />
+
+      <button (click)="login()">Login</button>
+    </div>
+  </div>
+</div>

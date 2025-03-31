@@ -1,0 +1,89 @@
+.sud-title {
+    font-size: 20px;
+}
+// กำหนดสีหลัก
+$primary-color: #ff7f2a;
+$text-color: #fff;
+$card-bg: #fff;
+$card-border: #ddd;
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: $primary-color;
+  margin: 0;
+  padding: 0;
+}
+
+.content1 {
+  padding: 16px;
+
+  .heading {
+    color: $text-color;
+    
+    h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: normal;
+      margin-bottom: 16px;
+    }
+  }
+
+  .seat-group {
+    margin-bottom: 24px;
+
+    h3 {
+      font-size: 18px;
+      font-weight: bold;
+      color: $text-color;
+      margin-bottom: 8px;
+      text-align: right;
+    }
+
+    .table-list {
+        display: grid;
+        gap: 12px;
+      
+        .p-card {
+          background-color: #fff;
+          padding: 12px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          border: 1px solid #ddd;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          transition: transform 0.2s ease-in-out;
+      
+          &:hover {
+            transform: translateY(-2px);
+          }
+        }
+      }      
+    }
+}
+.table-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .table-icon img {
+    width: 80px;
+    height: auto;
+    border: 1px solid black;
+  }
+
+  .table-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h4 {
+      margin: 0 0 0.5rem 0;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<div class="qr-container">
+  <div class="qr-box">
+    <!-- ✅ QR Code -->
+    <qrcode 
+      *ngIf="qrCodeData" 
+      [qrdata]="qrCodeData"   
+      [width]="200" 
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+
+
+    <!-- ✅ ปุ่มควบคุม -->
+    <div class="btn-group">
+      <button class="btn generate-btn" (click)="generateQRCode()">สร้าง QR Code</button>
+    </div>
+  </div>
+</div>

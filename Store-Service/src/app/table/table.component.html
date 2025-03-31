@@ -1,0 +1,27 @@
+<body>
+  <section class="column">
+    <section class="heading">
+      <div class="title">กำหนดโต๊ะ</div>
+    </section>
+
+    <p-card class="Card">
+      <div class="table-row">
+        <label class="C1">โต๊ะที่</label>
+      </div>
+      <div>
+        <input type="number" min="1" [(ngModel)]="table.index" class="input-box" />
+      </div>
+      <div>
+        <label class="C1">จำนวนที่นั่ง</label>
+      </div>
+      <div>
+        <input type="number" min="1" [(ngModel)]="table.seats" class="input-box" />
+      </div>
+
+      <div class="button-container" style="text-align: center;">
+        <p-button label="บันทึก" (click)="saveTable()" styleClass="save-button" 
+          [style]="{'width': '250px', 'height': '30px', 'background-color': 'black', 'color': 'white', 'font-size': '14px'}"/>
+      </div>
+    </p-card>
+  </section>
+</body>

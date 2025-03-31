@@ -1,0 +1,93 @@
+.order-info-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.order-info-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Kanit', sans-serif;
+  color: #333;
+
+  .table-number {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #222;
+  }
+
+  .customer-name {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: #444;
+  }
+
+  .order-items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+
+    th, td {
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      font-weight: 600;
+      background-color: #f7f7f7;
+    }
+
+    td:last-child, th:last-child {
+      text-align: right;
+    }
+  }
+
+  .order-summary {
+    text-align: right;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #222;
+  }
+
+  .actions {
+    margin-top: 1.5rem;
+    text-align: center;
+
+    .btn-confirm {
+      background-color: #000;
+      color: #fff;
+      padding: 0.6rem 1.8rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #333;
+      }
+    }
+  }
+}
+.no-order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; // ขยับลงมาตรงกลางจอ
+  text-align: center;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-in-out;
+}

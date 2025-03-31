@@ -1,0 +1,33 @@
+.sud-title {
+    font-size: 20px;
+}
+  .heading {
+      position: relative;
+      top: 30px;
+    h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: normal;
+      margin-bottom: 16px;
+    }
+  }
+  
+  .reservation-list {
+    position: relative;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .button-group {
+    position: relative;
+    top: 20px;
+    text-align: center;
+    margin-top: 12px;
+  }

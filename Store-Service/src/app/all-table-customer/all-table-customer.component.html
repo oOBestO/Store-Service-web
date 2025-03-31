@@ -1,0 +1,36 @@
+<section class="content1">
+  <div class="heading">
+    <h1>Restaurant</h1>
+    <h2>ข้าวสวย</h2>
+  </div>
+
+  <!-- กลุ่มโต๊ะตามจำนวนที่นั่ง -->
+  <div *ngFor="let seatGroup of seatGroups" class="seat-group">
+    <h3>{{ seatGroup.seats }} ที่นั่ง</h3>
+  
+    <div class="table-list">
+      <p-card *ngFor="let table of seatGroup.tables" class="table-card">
+        <ng-template pTemplate="content">
+          <div class="table-content">
+            <!-- ✅ แสดงรูปจาก Base64 -->
+            <div class="table-icon" style="display: flex; align-items: center; gap: 1rem;">
+              <img
+                *ngIf="table.image"
+                [src]="table.image"
+                (error)="table.image = 'assets/images/table/default.png'"
+                alt="โต๊ะที่ {{ table.index }}"
+                style="width: 80px; height: auto; border: 1px solid black;"
+              />
+            </div>
+            <!-- ✅ ข้อมูลโต๊ะ -->
+            <div class="table-info" style="display: flex; flex-direction: column; justify-content: center;">
+              <h4 style="margin: 0 0 0.5rem 0;">โต๊ะที่ : {{ table.index }}</h4>
+              <p-button (click)="orderFood(table.id)"[style]="{'background-color': 'black', 'border': 'none'}">🍽️ สั่งอาหาร</p-button>
+            </div>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>       
+  </div>
+  
+</section>

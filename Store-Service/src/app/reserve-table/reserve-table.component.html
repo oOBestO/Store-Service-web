@@ -1,0 +1,42 @@
+<div class="reserve-form">
+  <h1>จองโต๊ะร้านอาหาร</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- เวลา -->
+    <div class="form-group">
+      <label>เวลา</label>
+      <select formControlName="reservationTime" required>
+        <option value="" disabled selected>เลือกเวลา</option>
+        <option *ngFor="let time of times" [value]="time">{{ time }}</option>
+      </select>
+    </div>
+
+    <!-- ชื่อ -->
+    <div class="form-group">
+      <label>ชื่อ</label>
+      <input type="text" formControlName="customerName" placeholder="ชื่อผู้จอง" required />
+    </div>
+
+    <!-- เบอร์โทร -->
+    <div class="form-group">
+      <label>เบอร์โทร</label>
+      <input type="tel" formControlName="phoneNumber" placeholder="เบอร์โทร 10 หลัก" required />
+    </div>
+
+    <!-- โต๊ะ -->
+    <div class="form-group">
+      <label>เลือกโต๊ะ</label>
+      <select formControlName="tableId" required>
+        <option value="" disabled selected>เลือกโต๊ะ</option>
+        <option *ngFor="let table of tables" [value]="table.id">
+          โต๊ะ {{ table.index }} ({{ table.seats }} ที่นั่ง)
+        </option>
+      </select>
+    </div>
+
+    <!-- ปุ่ม -->
+    <div class="btn-group">
+      <button type="submit" [disabled]="form.invalid">ยืนยันการจอง</button>
+    </div>
+  </form>
+</div>
