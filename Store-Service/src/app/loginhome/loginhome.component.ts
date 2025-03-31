@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../app.module';
+import {jwtDecode} from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginHomeComponent {
   password: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
-  
+
   login() {
     this.http.post<any>('http://localhost:8888/api/auth/login', {
       username: this.username,
@@ -25,15 +26,21 @@ export class LoginHomeComponent {
     }).subscribe({
       next: (response) => {
         if (response.token) {
-          localStorage.setItem('token', response.token); // ✅ เก็บ token
-          this.router.navigate(['/']);
+          localStorage.setItem('token', response.token);
+
+          // 👇 Decode เพื่อดู role
+          const decodedToken: any = jwtDecode(response.token);
+          const role = decodedToken.role; // สมมติ backend ใส่ role มาใน payload
+          console.log('decodedToken',role); // ดูว่า token มี role หรือเปล่า
+          localStorage.setItem('role', role); // ✅ เก็บ role ไว้
+          location.href = '/home'; // หรือ path หน้าแรก
         } else {
-          alert(response.message); // ✅ แสดงข้อความ Error
+          alert(response.message);
         }
       },
       error: (error) => {
         console.error('Login error:', error);
-        alert(`Login Failed: ${error.error.message || 'Server Error'}`); // ✅ จัดการข้อความ Error จาก Server
+        alert(`Login Failed: ${error.error.message || 'Server Error'}`);
       }
     });
   }

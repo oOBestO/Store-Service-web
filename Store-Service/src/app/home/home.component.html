@@ -45,6 +45,10 @@
       </div>
     </div>
   </div>
-
-  <button (click)="confirmSelection()" class="btn confirm-btn">ยืนยัน</button>
+  <button
+  *ngIf="showConfirmButton"
+  (click)="confirmSelection()"
+  class="btn confirm-btn">
+  ยืนยัน
+</button>
 </div>

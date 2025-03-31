@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +19,7 @@ export class NavbarComponent {
   imageTitle: string = '';
   imageDescription: string = '';
   selectedFile: File | null = null;
+  userRole: string = '';
 
   constructor(private router: Router) {}
 
@@ -28,6 +30,13 @@ export class NavbarComponent {
           command: () => this.goBack(),
         },
       ];
+      if (typeof window !== 'undefined' && localStorage.getItem('token')) {
+        const token = localStorage.getItem('token');
+        if (token) {
+          const decodedToken: any = jwtDecode(token);
+          this.userRole = decodedToken.role; // ตัวแปร role
+        }
+      }
     }
 
     goBack() {
@@ -47,11 +56,10 @@ export class NavbarComponent {
       localStorage.removeItem('customerInfo');  // ✅ ลบข้อมูลอื่นๆ ถ้ามี
       localStorage.removeItem('orderData');
       localStorage.removeItem('tableId');
-
-      // 🧭 พาไปหน้า login หรือหน้าหลัก
-      this.router.navigate(['/login']);
+      localStorage.removeItem('role');
+      location.href = '/login';
     }
-    
+
     handleSubmit() {
       console.log('Title:', this.imageTitle);
       console.log('Description:', this.imageDescription);
@@ -68,6 +76,11 @@ export class NavbarComponent {
     }
     toggleSubMenu() {
       this.isSubMenuOpen = !this.isSubMenuOpen;
+    }
+    ngOnDestroy(): void {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.removeItem('hasRefreshedDashboard');
+      }
     }
   }
 
