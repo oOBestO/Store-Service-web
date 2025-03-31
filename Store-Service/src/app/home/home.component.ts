@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service'; // ✅ นำเข้า Service
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -28,18 +30,20 @@ export class HomeComponent implements OnInit {
   randomMenus: Menu[] = []; // ✅ เมนูแนะนำที่ถูกสุ่ม
   showConfirmButton = false;
 
-  constructor(private getAllMenus: GuestService, private router: Router,private dataService: DataService) {}
+  constructor(private getAllMenus: GuestService, private router: Router,private dataService: DataService,@Inject(PLATFORM_ID) private platformId: Object) {}
+  
 
   ngOnInit() {
-  const customerInfo = localStorage.getItem('customerInfo');
-  const tableId = localStorage.getItem('tableId');
-
-  this.showConfirmButton = !!customerInfo && !!tableId; // true ถ้ามีทั้งคู่
+    if (isPlatformBrowser(this.platformId)) {
+      const customerInfo = localStorage.getItem('customerInfo');
+      const tableId = localStorage.getItem('tableId');
+      this.showConfirmButton = !!customerInfo && !!tableId; // ✅ ย้ายเข้าใน block นี้
+    }
+  
     this.getAllMenus.getAllMenus().subscribe(data => {
       this.menus = data;
       this.groupMenusByCategory();
       this.getRandomMenus();
-
     });
   }
 
