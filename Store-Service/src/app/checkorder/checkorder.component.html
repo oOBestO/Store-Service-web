@@ -1,0 +1,45 @@
+<div class="heading">
+  <h1>เช็ครายการอาหาร</h1>
+  <h2>ข้าวสวย</h2>
+</div>
+<div class="order-container">
+  <div class="order-list" *ngIf="orders.length > 0; else noOrders">
+    <div class="order-card" *ngFor="let order of orders">
+      <div class="order-header">
+        <h2>โต๊ะ {{ getTableIndex(order.tableNumber) }}</h2>
+        <span class="status-badge" [ngClass]="{ 'confirmed': order.delivered }">
+          {{ order.delivered ? 'ส่งอาหารแล้ว' : 'จ่ายเงินแล้ว' }}
+        </span>
+      </div>
+    
+      <p class="customer-info">ลูกค้า: {{ order.customerName }}</p>
+      <ul class="menu-items">
+        <li *ngFor="let item of order.items">
+          <span class="menu-name">{{ item.menuName }}</span>
+          <span class="quantity">{{ item.quantity }} จาน</span>
+        </li>
+      </ul>
+    
+      <!-- ✅ ถ้ายังไม่กดยืนยัน -->
+      <button *ngIf="!order.delivered"
+              (click)="confirmDelivery(order.id)"
+              class="confirm-btn">
+        ยืนยันการส่งอาหาร
+      </button>
+    
+      <!-- ✅ ถ้ายืนยันแล้ว แสดงปุ่มยกเลิก -->
+      <button *ngIf="order.delivered"
+              (click)="cancelDelivery(order.id)"
+              class="cancel-btn">
+        ยกเลิก
+      </button>
+    </div>    
+  </div>
+
+  <ng-template #noOrders>
+    <div class="empty-state">
+      <img src="assets/empty-order.svg" alt="No orders">
+      <p>ยังไม่มีออเดอร์ที่จ่ายเงินแล้ว</p>
+    </div>
+  </ng-template>
+</div>
