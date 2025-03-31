@@ -1,12 +1,27 @@
 <div class="payment-page">
-  <p-toast></p-toast>
+  <div class="back-button-wrapper">
+    <p-button
+      icon="pi pi-angle-double-left"
+      class="p-1 w-7 h-7 text-sm back-btn"
+      [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
+      (click)="goBack()">
+    </p-button>
+  </div>
+
+  <!-- ✅ ส่วนอื่นๆ แยกออกมา -->
+  <p-toast></p-toast> 
 
   <p-steps
     [model]="items"
     [readonly]="true"
     [activeIndex]="activeIndex"
-    class="steps-custom"
-  ></p-steps>
+    (activeIndexChange)="onActiveIndexChange($event)"
+    content=""
+    [ngClass]="{
+      'custom-steps': true,
+      'mobile-steps': isMobile
+    }"
+    />
 
   <div class="payment-card">
     <h2>โต๊ะ {{ tableNumber }}</h2>

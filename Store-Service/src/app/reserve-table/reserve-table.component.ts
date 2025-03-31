@@ -1,11 +1,14 @@
   import { Component, OnInit } from '@angular/core';
   import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   import { TableService } from './Service/service';
+  import { MessageService } from 'primeng/api';
+  import { ToastModule } from 'primeng/toast';
 
   @Component({
     selector: 'app-reserve-table',
     templateUrl: './reserve-table.component.html',
-    styleUrls: ['./reserve-table.component.scss']
+    styleUrls: ['./reserve-table.component.scss'],
+    providers: [MessageService]
   })
   export class ReserveTableComponent implements OnInit {
     tables: any[] = [];
@@ -14,7 +17,8 @@
 
     constructor(
       private tableService: TableService,
-      private fb: FormBuilder
+      private fb: FormBuilder,
+      private messageService: MessageService
     ) {}
 
     ngOnInit(): void {
@@ -51,21 +55,31 @@
           endTime: end
         };
     
-        console.log('🚀 Reservation Data:', reservationData);
-    
         this.tableService.reserveTable(reservationData).subscribe(
-          (response) => {
-            alert('จองโต๊ะสำเร็จ!');
+          () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'จองโต๊ะสำเร็จ',
+              detail: 'ข้อมูลการจองถูกบันทึกแล้ว!',
+            });
             this.form.reset();
             this.ngOnInit();
           },
           (error) => {
             console.error('❌ Error:', error);
-            alert('เกิดข้อผิดพลาดในการจองโต๊ะ');
+            this.messageService.add({
+              severity: 'error',
+              summary: 'เกิดข้อผิดพลาด',
+              detail: 'ไม่สามารถจองโต๊ะได้',
+            });
           }
         );
       } else {
-        alert('กรุณากรอกข้อมูลให้ครบถ้วน!');
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'ข้อมูลไม่ครบถ้วน',
+          detail: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
+        });
       }
     }
     

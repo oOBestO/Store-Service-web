@@ -1,7 +1,7 @@
 .order-info-wrapper {
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding: 5rem 2rem 2rem;
 }
 
 .order-info-card {
@@ -90,4 +90,61 @@
   max-width: 500px;
   margin: 0 auto;
   animation: fadeIn 0.3s ease-in-out;
+  padding: 5rem 2rem 2rem;
+}
+.page-wrapper {
+  padding-top: 6rem; // ลองเริ่มที่ 4rem หรือปรับตามต้องการ
+}
+
+.back-button-wrapper {
+  position: fixed;     // ✅ ตรึงไว้กับหน้าจอ
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;       // ✅ อยู่เหนือทุก element อื่น
+}
+
+.back-btn {
+  background-color: black !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.1rem 0.1rem !important; // 🔽 ลด padding
+  width: 1.8rem;                     // 🔽 ลดขนาดความกว้าง
+  height: 1.5rem;                    // 🔽 ลดความสูง
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;                // 🔽 ปรับขนาดไอคอนให้พอดี
+  line-height: 1;
+}
+
+.btn-confirm {
+  background-color: #28a745;     // เขียวสดใส
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #218838;
+    transform: scale(1.03);
+  }
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;   // ✅ จัดปุ่มให้อยู่ตรงกลาง
+  margin-top: 1rem;
+}
+
+.small-btn {
+  font-size: 0.75rem;         // 🔽 ขนาดตัวอักษรเล็กลงอีก
+  padding: 0.25rem 1rem;      // 🔽 ลดความสูงและความกว้างของปุ่ม
+  border-radius: 6px;
+  box-shadow: none !important;  // ❌ ลบเงาจาง ๆ ออก
+  height: 2rem;                 // ✅ กำหนดความสูงแน่นอน
 }

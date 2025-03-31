@@ -1,4 +1,12 @@
 <div class="background">
+  <div class="back-button-wrapper">
+    <p-button
+      icon="pi pi-angle-double-left"
+      class="p-1 w-7 h-7 text-sm back-btn"
+      [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
+      (click)="goBack()">
+    </p-button>
+  </div>
   <div class="card">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <p-toast />
@@ -8,7 +16,10 @@
     [activeIndex]="activeIndex"
     (activeIndexChange)="onActiveIndexChange($event)"
     content=""
-    [ngClass]="customClass"
+    [ngClass]="{
+      'custom-steps': true,
+      'mobile-steps': isMobile
+    }"
     />
   </div>
 </div>

@@ -26,10 +26,15 @@ export class HomeComponent implements OnInit {
   selectedMenus: number[]=[] // ✅ ใช้ `Set` เพื่อเก็บ ID ของเมนูที่ถูกเลือก
   categoryKeys: string[] = []; // ✅ ใช้ตัวแปรเก็บ key ของหมวดหมู่
   randomMenus: Menu[] = []; // ✅ เมนูแนะนำที่ถูกสุ่ม
+  showConfirmButton = false;
 
   constructor(private getAllMenus: GuestService, private router: Router,private dataService: DataService) {}
 
   ngOnInit() {
+  const customerInfo = localStorage.getItem('customerInfo');
+  const tableId = localStorage.getItem('tableId');
+
+  this.showConfirmButton = !!customerInfo && !!tableId; // true ถ้ามีทั้งคู่
     this.getAllMenus.getAllMenus().subscribe(data => {
       this.menus = data;
       this.groupMenusByCategory();

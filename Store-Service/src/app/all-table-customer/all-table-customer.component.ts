@@ -82,4 +82,7 @@ export class AllTableCustomerComponent {
   orderFood(tableId: number) {
     this.router.navigate(['/addphonenumber'], { queryParams: { tableId: tableId } });
   }
+  goBack() {
+    this.router.navigate(['/home']);
+  }
 }

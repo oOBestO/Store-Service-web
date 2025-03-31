@@ -4,6 +4,7 @@ import { ComfirmPaymentService } from './Service/service';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../app.module';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-confirm-payment',
@@ -11,6 +12,7 @@ import { MessageService } from 'primeng/api';
   imports: [
       CommonModule,
       PrimeNgModule,
+      ToastModule
     ],
   templateUrl: './confirm-payment.component.html',
   styleUrls: ['./confirm-payment.component.scss'],
@@ -25,7 +27,8 @@ export class ConfirmPaymentComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private ComfirmPaymentService: ComfirmPaymentService
+    private ComfirmPaymentService: ComfirmPaymentService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -49,13 +52,24 @@ export class ConfirmPaymentComponent {
   confirmPayment(orderId: number) {
     this.ComfirmPaymentService.updatePaymentStatus(orderId, true).subscribe({
       next: () => {
-        alert('✅ ยืนยันการชำระเงินเรียบร้อย');
-        this.loadUnpaidOrders(); // โหลดใหม่หลังจากยืนยัน
+        this.messageService.add({
+          severity: 'success',
+          summary: 'สำเร็จ',
+          detail: 'ยืนยันการชำระเงินเรียบร้อย!'
+        });
+        this.loadUnpaidOrders();
       },
       error: (err) => {
         console.error('❌ Error confirming payment:', err);
-        alert('เกิดข้อผิดพลาดในการยืนยันการชำระเงิน');
+        this.messageService.add({
+          severity: 'error',
+          summary: 'เกิดข้อผิดพลาด',
+          detail: 'ไม่สามารถยืนยันการชำระเงินได้'
+        });
       }
     });
+  }
+  goBack() {
+    this.router.navigate(['/home']);
   }
 }

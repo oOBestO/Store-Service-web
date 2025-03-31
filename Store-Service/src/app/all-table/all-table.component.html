@@ -1,4 +1,14 @@
+<p-toast position="top-center"></p-toast>
+<p-confirmDialog></p-confirmDialog>
 <section class="content1">
+  <div class="back-button-wrapper">
+    <p-button
+      icon="pi pi-angle-double-left"
+      class="p-1 w-7 h-7 text-sm back-btn"
+      [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
+      (click)="goBack()">
+    </p-button>
+  </div>
   <div class="heading">
     <p-button
   class="download-btn"

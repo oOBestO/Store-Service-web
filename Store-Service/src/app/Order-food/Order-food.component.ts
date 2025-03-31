@@ -29,6 +29,11 @@ export class OrderComponent {
   showSelectMenuModal = false;
   allMenus: Menu[] = []; // เมนูทั้งหมดจากฐานข้อมูล
 
+  isMobile: boolean = false;
+
+  checkMobile = (): void => {
+    this.isMobile = window.innerWidth < 768;
+  };
 
   onActiveIndexChange(event: number) {
     this.activeIndex = event;
@@ -38,6 +43,10 @@ export class OrderComponent {
     } // Inject Service
 
   ngOnInit(): void {
+    
+    this.checkMobile(); // ✅ เรียกครั้งแรก
+    window.addEventListener('resize', this.checkMobile);
+
     const savedOrder = localStorage.getItem('selectedMenus');
     if (savedOrder) {
       this.selectedMenus = JSON.parse(savedOrder);
@@ -97,6 +106,9 @@ export class OrderComponent {
       this.allMenus = data;
     });
   }
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', this.checkMobile);
+  }
 
  // เปิด Modal เลือกเมนู
  openSelectMenuModal() {
@@ -152,5 +164,12 @@ addMenuToOrder(menu: Menu) {
     this.saveToLocalStorage(); // ✅ อัปเดต `localStorage`
   }
 
+  goBack() {
+    this.router.navigate(['/home']);
+  }
+
+  
+
 }
+
 

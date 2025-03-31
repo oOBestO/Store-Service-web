@@ -48,8 +48,18 @@ constructor(private guestService: GuestService,public messageService: MessageSer
    // ✅ ลบเมนู
    deleteMenu(id: number) {
     this.http.delete(`http://localhost:8888/api/menus/${id}`).subscribe(() => {
-      alert('ลบเมนูสำเร็จ!');
+      this.messageService.add({
+        severity: 'success',
+        summary: 'สำเร็จ',
+        detail: 'ลบเมนูเรียบร้อยแล้ว!'
+      });
       this.loadMenus();
+    }, error => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'เกิดข้อผิดพลาด',
+        detail: 'ไม่สามารถลบเมนูได้'
+      });
     });
   }
 
@@ -68,6 +78,13 @@ constructor(private guestService: GuestService,public messageService: MessageSer
 
   confirm() {
     console.log("Saved menu:", this.menuItems);
-    alert('บันทึกเมนูเรียบร้อย!');
+    this.messageService.add({
+      severity: 'success',
+      summary: 'บันทึกสำเร็จ',
+      detail: 'บันทึกเมนูเรียบร้อยแล้ว!'
+    });
+  }
+  goBack() {
+    this.router.navigate(['/home']);
   }
 }

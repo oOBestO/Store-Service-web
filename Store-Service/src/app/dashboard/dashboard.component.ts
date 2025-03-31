@@ -4,6 +4,7 @@ import { ChartData, ChartOptions } from 'chart.js';
 import { PrimeNgModule } from '../app.module';
 import { CommonModule } from '@angular/common';
 import { MessageService } from 'primeng/api';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit {
   data!: ChartData<'line'>;
   options!: ChartOptions<'line'>;
 
-  constructor(private orderService: ComfirmPaymentService) {}
+  constructor(private orderService: ComfirmPaymentService,private router: Router ) {}
 
   ngOnInit(): void {
     this.orderService.getDailySales().subscribe((sales) => {
@@ -96,5 +97,8 @@ export class DashboardComponent implements OnInit {
   //     };
   //   });
   // }
+  goBack() {
+    this.router.navigate(['/home']);
+  }
 }
 
