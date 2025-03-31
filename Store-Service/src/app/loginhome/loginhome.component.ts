@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../app.module';
 import {jwtDecode} from 'jwt-decode';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,13 @@ import {jwtDecode} from 'jwt-decode';
   templateUrl: './loginhome.component.html',
   styleUrls: ['./loginhome.component.scss'],
   imports: [CommonModule, FormsModule, PrimeNgModule], // ✅ Import FormsModule ตรงนี้ก็พอ
+  providers: [MessageService]
 })
 export class LoginHomeComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private messageService: MessageService) {}
 
   login() {
     this.http.post<any>('http://localhost:8888/api/auth/login', {
@@ -27,20 +29,27 @@ export class LoginHomeComponent {
       next: (response) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
-
-          // 👇 Decode เพื่อดู role
+  
           const decodedToken: any = jwtDecode(response.token);
-          const role = decodedToken.role; // สมมติ backend ใส่ role มาใน payload
-          console.log('decodedToken',role); // ดูว่า token มี role หรือเปล่า
-          localStorage.setItem('role', role); // ✅ เก็บ role ไว้
-          location.href = '/home'; // หรือ path หน้าแรก
+          const role = decodedToken.role;
+          localStorage.setItem('role', role);
+  
+          // ✅ ไม่ต้องแสดง messageService.add เมื่อ login สำเร็จ
+          location.href = '/home';
         } else {
-          alert(response.message);
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'เกิดข้อผิดพลาด',
+            detail: response.message,
+          });
         }
       },
       error: (error) => {
-        console.error('Login error:', error);
-        alert(`Login Failed: ${error.error.message || 'Server Error'}`);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'เข้าสู่ระบบล้มเหลว',
+          detail: error.error.message || 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้'
+        });
       }
     });
   }
