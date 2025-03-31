@@ -22,5 +22,5 @@ export class GuestService {
   addGuest(guest: Guest): Observable<Guest> {
     return this.http.post<Guest>(this.apiUrl, guest);
   }
-
+  
 }

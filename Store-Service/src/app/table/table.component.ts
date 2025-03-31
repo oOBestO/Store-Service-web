@@ -46,7 +46,11 @@ export class TableComponent {
       return;
     }
 
-
+    if (!seats || seats < 1) {
+      alert('จำนวนที่นั่งต้องไม่เป็นค่าว่างหรือศูนย์');
+      return;
+    }
+    
     this.guestService.saveTable(this.table).subscribe(
       () => {
         this.messageService.add({

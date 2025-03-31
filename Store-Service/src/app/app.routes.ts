@@ -21,6 +21,7 @@ import { AuthGuard } from './auth.guard';
 import { LoginHomeComponent } from './loginhome/loginhome.component';
 import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CheckOrderComponent } from './checkorder/checkorder.component';
 
 export const routes: Routes = [
 //{ path: '', component: HomeComponent, pathMatch: 'full' },
@@ -42,6 +43,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginHomeComponent },
   { path: '', component: LoginHomeComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'checkorder', component: CheckOrderComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

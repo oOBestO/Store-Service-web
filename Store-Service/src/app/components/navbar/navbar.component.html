@@ -43,6 +43,7 @@
         <li *ngIf="userRole === 'ROLE_ADMIN' || userRole === 'ROLE_EMPLOYEE'">
           <a href="/confirmpayment"><i class="pi pi-list"></i> ตรวจสอบการชำระเงิน</a>
         </li>
+        <li *ngIf="userRole === 'ROLE_ADMIN' || userRole === 'ROLE_EMPLOYEE'"><a href="/checkorder"><i class="pi pi-bars"></i> เช็ครายการอาหาร</a></li>
         <li *ngIf="userRole === 'ROLE_ADMIN'"><a href="/reservations"><i class="pi pi-bars"></i> จัดการการจองโต๊ะ</a></li>
         <li *ngIf="userRole === 'ROLE_ADMIN'"><a href="/admin/qr"><i class="pi pi-qrcode"></i> สร้าง QR Code</a></li>
 
