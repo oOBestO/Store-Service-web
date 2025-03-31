@@ -99,6 +99,10 @@ export class SuccessComponent {
     }
 
     goHome() {
+      localStorage.removeItem('customerInfo');  // ✅ ลบข้อมูลอื่นๆ ถ้ามี
+      localStorage.removeItem('orderData');
+      localStorage.removeItem('tableId');
+
       this.router.navigate(['/home']); // เปลี่ยนตาม route ของคุณ
     }
 

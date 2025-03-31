@@ -1,5 +1,5 @@
-<nav>
 
+<div *ngIf="userRole" class="dropdown-menu">
     <nav class="header p-4 w-full fixed top-0 left-0 z-10 flex justify-between items-center">
         <!-- 🔹 ปุ่มย้อนกลับ -->
         <!--<p-button
@@ -18,43 +18,38 @@
     </nav>
 
 
-<!-- ✅ Dropdown Menu -->
-<div *ngIf="isMenuOpen" class="dropdown-menu">
-    <ul>
-      <!-- ตั้งค่า -->
-      <li (click)="toggleSubMenu()" class="has-submenu">
-        <a href="javascript:void(0)">
-          <span class="menu-left">
-            <i class="pi pi-pen-to-square"></i>
-            <span class="menu-text">เพิ่มและแก้ไข</span>
-          </span>
-          <i class="pi pi-chevron-right submenu-arrow"></i>
-        </a>
+    <div *ngIf="isMenuOpen" class="dropdown-menu">
+      <ul>
+        <!-- ✅ เฉพาะ ADMIN เท่านั้น -->
+        <li *ngIf="userRole === 'ROLE_ADMIN'" (click)="toggleSubMenu()" class="has-submenu">
+          <a href="javascript:void(0)">
+            <span class="menu-left">
+              <i class="pi pi-pen-to-square"></i>
+              <span class="menu-text">เพิ่มและแก้ไข</span>
+            </span>
+            <i class="pi pi-chevron-right submenu-arrow"></i>
+          </a>
+          <ul class="submenu" *ngIf="isSubMenuOpen">
+            <li><a href="/addmenu">เพิ่มเมนู</a></li>
+            <li><a href="/admin/addtable">เพิ่มโต๊ะ</a></li>
+            <li><a href="/admin/table">แก้ไขโต๊ะ</a></li>
+          </ul>
+        </li>
 
-        <ul class="submenu" *ngIf="isSubMenuOpen">
-          <li><a href="/addmenu">เพิ่มเมนู</a></li>
-          <li><a href="/admin/addtable">เพิ่มโต็ะ</a></li>
-          <li><a href="/admin/table">แก้ไขโต็ะ</a></li>
-        </ul>
-      </li>
+        <!-- ✅ ทั้ง ADMIN และ EMPLOYEE -->
+        <li><a href="/table/all"><i class="pi pi-list"></i> สั่งอาหาร</a></li>
+        <li *ngIf="userRole === 'ROLE_ADMIN'"><a href="/dashboard"><i class="pi pi-list"></i> Dashboard</a></li>
+        <!-- 🔹 สำหรับของ employee -->
+        <li *ngIf="userRole === 'ROLE_ADMIN' || userRole === 'ROLE_EMPLOYEE'">
+          <a href="/confirmpayment"><i class="pi pi-list"></i> ตรวจสอบการชำระเงิน</a>
+        </li>
+        <li *ngIf="userRole === 'ROLE_ADMIN'"><a href="/reservations"><i class="pi pi-bars"></i> จัดการการจองโต๊ะ</a></li>
+        <li *ngIf="userRole === 'ROLE_ADMIN'"><a href="/admin/qr"><i class="pi pi-qrcode"></i> สร้าง QR Code</a></li>
 
-      <!-- อื่น ๆ -->
-      <li><a href="/table/all"> <!-- ใส่ path ด้วยถ้ามี -->
-        <i class="pi pi-list"></i>  ดูรายการอาหาร</a></li>
-      <li><a href="/dashboard"> <!-- ใส่ path ด้วยถ้ามี -->
-        <i class="pi pi-list"></i>  Dashboard</a></li>
-      <li><a href="/confirmpayment"> <!-- ใส่ path ด้วยถ้ามี -->
-        <i class="pi pi-list"></i>  ตรวจสอบการชำระเงิน</a></li>
-      <li><a href="/reservations">
-        <i class="pi pi-bars"></i>  จัดการการจองโต็ะ</a></li>
-      <li><a href="/admin/qr">
-        <i class="pi pi-qrcode"></i>  สร้าง QR Code</a></li>
-      <li (click)="logout()">
+        <!-- ✅ Logout -->
+        <li (click)="logout()">
           <i class="pi pi-sign-out"></i> ออกจากระบบ
-      </li>
-    </ul>
-  </div>
-
-
-
-</nav>
+        </li>
+      </ul>
+    </div>
+</div>
