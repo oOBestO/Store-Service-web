@@ -1,50 +1,45 @@
 .dashboard-container {
+  padding: 1rem;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 5rem 1rem 3rem 1rem;
-  min-height: 100vh;
-  background-color: #e77c30;
 
   .chart-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 650px; // 👈 ขยายกรอบการ์ด
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    background: white;
-    margin-top: 4rem;
-    text-align: center;
-
-    .chart-subtitle {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 1.5rem;
-    }
-
-    .chart {
-      height: 38rem !important; // 👈 ขยายความสูง
-      width: 100% !important;
-    }
+    max-width: 900px;
+    min-height: 70vh; // ✅ เพิ่มความสูงขั้นต่ำตาม viewport
+    box-sizing: border-box;
   }
 }
+
+
+.dashboard-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #444;
+}
+
 .back-button-wrapper {
-  position: fixed;     // ✅ ตรึงไว้กับหน้าจอ
+  position: fixed;
   top: 1rem;
   left: 1rem;
-  z-index: 1000;       // ✅ อยู่เหนือทุก element อื่น
+  z-index: 1000;
 }
 
 .back-btn {
   background-color: black !important;
   color: white !important;
   border: none !important;
-  padding: 0.1rem 0.1rem !important; // 🔽 ลด padding
-  width: 1.8rem;                     // 🔽 ลดขนาดความกว้าง
-  height: 1.5rem;                    // 🔽 ลดความสูง
+  width: 1.8rem;
+  height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.5rem;                // 🔽 ปรับขนาดไอคอนให้พอดี
-  line-height: 1;
+  font-size: 0.5rem;
 }
+
