@@ -57,6 +57,10 @@
           <a href="/confirmpayment"><i class="pi pi-credit-card"></i> ตรวจสอบการชำระเงิน</a>
         </li>
 
+        <li *ngIf="userRole === 'ROLE_ADMIN' || userRole === 'ROLE_EMPLOYEE'">
+          <a href="/checkorder"><i class="pi pi-check-square"></i> เช็ครายการอาหาร</a>
+        </li>
+
         <!-- จัดการการจองโต๊ะ -->
         <li *ngIf="userRole === 'ROLE_ADMIN'">
           <a href="/reservations"><i class="pi pi-calendar"></i> จัดการการจองโต๊ะ</a>
