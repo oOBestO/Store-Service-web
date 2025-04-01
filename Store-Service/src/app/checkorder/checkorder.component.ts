@@ -30,13 +30,13 @@ export class CheckOrderComponent implements OnInit {
     this.orderService.getPaidOrders().subscribe({
       next: (data: OrderDTO[]) => {
         console.log('✅ Orders ที่ได้จาก backend:', data);
-        this.orders = data;
+        this.orders = data.filter(order => this.isToday(order.createdAt));
       },
       error: (err: any) => {
         console.error('❌ ดึง orders ไม่ได้:', err);
       }
     });
-  }
+  }  
 
   getTableIndex(tableId: number): number | string {
     const table = this.tables.find(t => t.id === tableId);
@@ -64,6 +64,17 @@ export class CheckOrderComponent implements OnInit {
   }
   goBack() {
     this.router.navigate(['/order']);
+  }
+  
+  isToday(dateStr: string): boolean {
+    const date = new Date(dateStr);
+    const today = new Date();
+  
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
   }
   
 }

@@ -14,7 +14,7 @@
   <div class="order-list" *ngIf="orders.length > 0; else noOrders">
     <div class="order-card" *ngFor="let order of orders">
       <div class="order-header">
-        <h2>โต๊ะ {{ getTableIndex(order.tableNumber) }}</h2>
+        <h2>โต๊ะ {{ order.tableNumber }}</h2>
         <span class="status-badge" [ngClass]="{ 'confirmed': order.delivered }">
           {{ order.delivered ? 'ส่งอาหารแล้ว' : 'จ่ายเงินแล้ว' }}
         </span>
@@ -24,7 +24,7 @@
       <ul class="menu-items">
         <li *ngFor="let item of order.items">
           <span class="menu-name">{{ item.menuName }}</span>
-          <span class="quantity">{{ item.quantity }} จาน</span>
+          <span class="quantity">{{ item.quantity }}</span>
         </li>
       </ul>
     
@@ -46,7 +46,6 @@
 
   <ng-template #noOrders>
     <div class="empty-state">
-      <img src="assets/empty-order.svg" alt="No orders">
       <p>ยังไม่มีออเดอร์ที่จ่ายเงินแล้ว</p>
     </div>
   </ng-template>

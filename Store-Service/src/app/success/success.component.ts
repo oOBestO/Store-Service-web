@@ -37,8 +37,10 @@ export class SuccessComponent {
     isMobile: boolean = false;
 
     checkMobile = (): void => {
-    this.isMobile = window.innerWidth < 768;
-    };
+      if (typeof window !== 'undefined') {
+        this.isMobile = window.innerWidth < 768;
+      }
+    };    
 
 
 
