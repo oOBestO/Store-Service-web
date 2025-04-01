@@ -7,7 +7,7 @@
   </p-button>
 </div>
 <section class="content1">
-  
+
   <div class="heading">
     <h1>Restaurant</h1>
     <h2>ข้าวสวย</h2>
@@ -16,7 +16,7 @@
   <!-- กลุ่มโต๊ะตามจำนวนที่นั่ง -->
   <div *ngFor="let seatGroup of seatGroups" class="seat-group">
     <h3>{{ seatGroup.seats }} ที่นั่ง</h3>
-  
+
     <div class="table-list">
       <p-card *ngFor="let table of seatGroup.tables" class="table-card">
         <ng-template pTemplate="content">
@@ -34,12 +34,12 @@
             <!-- ✅ ข้อมูลโต๊ะ -->
             <div class="table-info" style="display: flex; flex-direction: column; justify-content: center;">
               <h4 style="margin: 0 0 0.5rem 0;">โต๊ะที่ : {{ table.index }}</h4>
-              <p-button (click)="orderFood(table.id)"[style]="{'background-color': 'black', 'border': 'none'}">🍽️ สั่งอาหาร</p-button>
+              <p-button (click)="orderFood(table.index)"[style]="{'background-color': 'black', 'border': 'none'}">🍽️ สั่งอาหาร</p-button>
             </div>
           </div>
         </ng-template>
       </p-card>
-    </div>       
+    </div>
   </div>
-  
+
 </section>
