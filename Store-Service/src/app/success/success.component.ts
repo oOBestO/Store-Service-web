@@ -68,7 +68,7 @@ export class SuccessComponent {
       { label: 'ชำระเงินเสร็จสิ้น', command: () => this.router.navigate(['/success']) }
     ];
   }
-  
+
   checkMobile = (): void => {
     if (isPlatformBrowser(this.platformId)) {
       this.isMobile = window.innerWidth < 768;
