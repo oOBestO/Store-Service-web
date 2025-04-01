@@ -19,6 +19,14 @@ export class LoginHomeComponent {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  ngOnInit() {
+    localStorage.removeItem('token');         // ✅ ลบ token
+    localStorage.removeItem('customerInfo');  // ✅ ลบข้อมูลอื่นๆ ถ้ามี
+    localStorage.removeItem('orderData');
+    localStorage.removeItem('tableId');
+    localStorage.removeItem('role');
+  }
+
   login() {
     this.http.post<any>('http://localhost:8888/api/auth/login', {
       username: this.username,

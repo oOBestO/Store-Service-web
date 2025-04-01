@@ -103,7 +103,7 @@ export class SuccessComponent {
       localStorage.removeItem('orderData');
       localStorage.removeItem('tableId');
 
-      this.router.navigate(['/home']); // เปลี่ยนตาม route ของคุณ
+      this.router.navigate(['/table/all']); // เปลี่ยนตาม route ของคุณ
     }
 
 }

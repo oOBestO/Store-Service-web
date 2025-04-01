@@ -26,7 +26,7 @@ export const routes: Routes = [
 //{ path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'admin/addtable', component: TableComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
   { path: 'admin/table', component: AllTableComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
-  { path: 'reserve', component: ReserveTableComponent, pathMatch: 'full' , canActivate: [AuthGuard] },
+  { path: 'reserve', component: ReserveTableComponent, pathMatch: 'full' },
   { path: 'reservations', component: ReservationDetailComponent , canActivate: [AuthGuard] },
   { path: 'table/all', component: AllTableCustomerComponent },
   { path: 'admin/qr', component: TableQrComponent , canActivate: [AuthGuard] },

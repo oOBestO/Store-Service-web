@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
             type: 'line',
             label: 'แนวโน้มยอดขาย',
             data: values,
-            borderColor: '#FFA726',
+            borderColor: '#42A5F5',
             tension: 0.4,
             fill: false,
           },
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
             type: 'bar',
             label: 'ยอดขายรายวัน (บาท)',
             data: values,
-            backgroundColor: '#42A5F5',
+            backgroundColor: '#FFA726',
             borderRadius: 6,
           }
         ],

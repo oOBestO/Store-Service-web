@@ -10,13 +10,6 @@
     </p-button>
   </div>
   <div class="heading">
-    <p-button
-  class="download-btn"
-  [routerLink]="['/admin/qr']"
-  [style]="{ 'background-color': 'white', 'border': 'none' }"
->
-  <i class="pi pi-download download-icon" [style]="{ 'color': 'black' }"></i>
-</p-button>
     <h1>Restaurant</h1>
   </div>
 
@@ -40,7 +33,7 @@
                 style="width: 80px; height: auto; border: 1px solid black;"
               />
             </div>
-          
+
             <!-- ข้อมูลโต๊ะด้านขวา: จัดเป็นคอลัมน์ -->
             <div class="table-info" style="display: flex; flex-direction: column; justify-content: center;">
               <h4 style="margin: 0 0 0.5rem 0;">โต๊ะที่ : {{ table.index }}</h4>
@@ -50,7 +43,7 @@
                 [style]="{ 'background-color': 'black', 'border': 'none' }"
               > ลบ</p-button>
             </div>
-          </div>                  
+          </div>
         </ng-template>
       </p-card>
     </div>
