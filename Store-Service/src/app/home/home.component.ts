@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service'; // ✅ นำเข้า Service
-import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -29,21 +27,22 @@ export class HomeComponent implements OnInit {
   categoryKeys: string[] = []; // ✅ ใช้ตัวแปรเก็บ key ของหมวดหมู่
   randomMenus: Menu[] = []; // ✅ เมนูแนะนำที่ถูกสุ่ม
   showConfirmButton = false;
+  tokens: string | null = null;
 
-  constructor(private getAllMenus: GuestService, private router: Router,private dataService: DataService,@Inject(PLATFORM_ID) private platformId: Object) {}
-  
+  constructor(private getAllMenus: GuestService, private router: Router,private dataService: DataService) {}
 
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      const customerInfo = localStorage.getItem('customerInfo');
-      const tableId = localStorage.getItem('tableId');
-      this.showConfirmButton = !!customerInfo && !!tableId; // ✅ ย้ายเข้าใน block นี้
-    }
-  
+  const token = localStorage.getItem('token');
+  this.tokens = token;
+  const customerInfo = localStorage.getItem('customerInfo');
+  const tableId = localStorage.getItem('tableId');
+
+  this.showConfirmButton = !!customerInfo && !!tableId; // true ถ้ามีทั้งคู่
     this.getAllMenus.getAllMenus().subscribe(data => {
       this.menus = data;
       this.groupMenusByCategory();
       this.getRandomMenus();
+
     });
   }
 
@@ -76,5 +75,8 @@ export class HomeComponent implements OnInit {
     console.log("📌 ส่งเมนู:", this.selectedMenus);
     this.dataService.setMenus(this.selectedMenus);
     this.router.navigate(['/order']);
+  }
+  goBack() {
+    this.router.navigate(['/addphonenumber']);
   }
 }

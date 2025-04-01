@@ -55,7 +55,7 @@ submitCustomerInfo() {
   }
 }
   goBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/table/all']);
   }
 
 }
