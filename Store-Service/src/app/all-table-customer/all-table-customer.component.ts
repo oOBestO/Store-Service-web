@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../app.module';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-all-table-customer', // ✅ เปลี่ยน selector ให้ตรงกับชื่อใหม่
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 export class AllTableCustomerComponent {
   tables: any[] = [];
   seatGroups: { seats: number; tables: any[] }[] = [];
+  tokens: string | null = null;
 
   constructor(
     private guestService: GuestService,
@@ -24,6 +26,8 @@ export class AllTableCustomerComponent {
   ) {}
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    this.tokens = token;
     this.loadTables();
   }
 
@@ -83,6 +87,9 @@ export class AllTableCustomerComponent {
     this.router.navigate(['/addphonenumber'], { queryParams: { tableId: tableId } });
   }
   goBack() {
+    localStorage.removeItem('customerInfo');  // ✅ ลบข้อมูลอื่นๆ ถ้ามี
+    localStorage.removeItem('orderData');
+    localStorage.removeItem('tableId');
     this.router.navigate(['/home']);
   }
 }

@@ -1,3 +1,14 @@
+<div *ngIf="tokens && showConfirmButton">
+  <div class="back-button-wrapper">
+    <p-button
+      icon="pi pi-angle-double-left"
+      class="p-1 w-7 h-7 text-sm back-btn"
+      [style]="{'background-color': 'black', 'color': 'white', 'border': 'none'}"
+      (click)="goBack()">
+    </p-button>
+  </div>
+</div>
+
 <div class="container">
   <h1 class="main-title">Restaurant</h1>
   <h2 class="subtitle">ข้าวสวย</h2>

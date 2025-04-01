@@ -27,10 +27,13 @@ export class HomeComponent implements OnInit {
   categoryKeys: string[] = []; // ✅ ใช้ตัวแปรเก็บ key ของหมวดหมู่
   randomMenus: Menu[] = []; // ✅ เมนูแนะนำที่ถูกสุ่ม
   showConfirmButton = false;
+  tokens: string | null = null;
 
   constructor(private getAllMenus: GuestService, private router: Router,private dataService: DataService) {}
 
   ngOnInit() {
+  const token = localStorage.getItem('token');
+  this.tokens = token;
   const customerInfo = localStorage.getItem('customerInfo');
   const tableId = localStorage.getItem('tableId');
 
@@ -72,5 +75,8 @@ export class HomeComponent implements OnInit {
     console.log("📌 ส่งเมนู:", this.selectedMenus);
     this.dataService.setMenus(this.selectedMenus);
     this.router.navigate(['/order']);
+  }
+  goBack() {
+    this.router.navigate(['/addphonenumber']);
   }
 }
