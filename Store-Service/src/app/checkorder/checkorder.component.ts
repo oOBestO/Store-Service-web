@@ -30,6 +30,10 @@ export class CheckOrderComponent implements OnInit {
     this.orderService.getPaidOrders().subscribe({
       next: (data: OrderDTO[]) => {
         console.log('✅ Orders ที่ได้จาก backend:', data);
+        data.forEach(order => {
+          const date = new Date(order.createdAt);
+          console.log(`🕒 order ${order.id}: ${date.toLocaleString()} (${date.toDateString()})`);
+        });        
         this.orders = data.filter(order => this.isToday(order.createdAt));
       },
       error: (err: any) => {
@@ -76,5 +80,5 @@ export class CheckOrderComponent implements OnInit {
       date.getFullYear() === today.getFullYear()
     );
   }
-  
+
 }
